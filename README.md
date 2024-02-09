@@ -34,5 +34,8 @@
 
 - Capacity: Generally a PV will specify storage capacity. This is set by set the storage capacity of PV.
 - Volume Models: Kubernetes supports 2 volume modes of Persistent volume. A valid value for volume mode can be either file system or block. Filesystem is the default mode.
-
-**Access Modes:** 
+- Access Modes:
+  1. Read Only Many (ROX) - allows being mounted by multiple nodes in read-only mode.
+  2. Read Write Once (RWO) - allows being mounted by a single node in read-write mode.
+  3. Read Write Many (RWX) - allow multiple nodes to be mounted in read-write mode.
+     
