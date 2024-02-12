@@ -5,6 +5,36 @@
 **What is Jenkins declaritive pipeline?**
 
 **What are stages and flow of Jenkins CICD pipeline?**
+- Dev
+- Stage
+- Prod
+
+  * So the code will deploy to the target platform that is kubernetes with Continues Integration and Continues Delivery approach.
+  * Let's say there is a user who want to make change in feature branch or any branch he is assign, in his version control system (GitHub).
+  * There is a web hook which triggers the jenkins pipeline.
+  * First thing which happen in the pipeline is continues Integration where different stages are there.
+
+      * Code checkout stage: If we are using the java application so we will checkout the java code.
+      * Building and Unit testing: We can use maven, to run the application we can trigger the maven targets, once this is successful we will move to the code scanning stage.
+      * Code Scanning: We will verify if the code has any static code or any duplicate code, syntax issues. This code analysis can be done through Sonar Cube. After this is successful we will move to the Image build creation.
+      * Image build: Container Images we can use docker or podman. Once the container image is created we will scan the image which is created, so for image scanning we have different type of tools like trivy. If this is also working fine we will move to the final stage.
+      * Image Push: We will push the Image to the image registry. For this we are using docker hub.
+      * Once we have new Image Ex: testimage:v2, we will update the image in kubernetes manifest.
+      * As a good practise will should keep our manifest in different repository from source code repository
+
+    ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/5272cead-ed27-43c0-a82a-1b402f197a47)
+
+* After that the code should move from feature branch to Pre-prod and Production environment.
+
+  ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/d1ac12b3-9288-4ff8-a751-98fec0ab61d8)
+
+In an organization 3 branch will be there at any point.
+1. Feature branch, might be 0, 1 or 2 depends if there any new changes or bug need to enhance.
+2. Main branch always be 1
+3. Release branch can be carry multiple releases, customer can choose which release version they need to go for.
+
+
+    
 
 **Difference between Monolithic and Microservices?**
 
