@@ -30,6 +30,7 @@
 - A PVC is used to mount a PV into a pod.
 - We can map different classes to different services levels and different backend policies.
 
+
 **Features of Persistent Volume**.
 
 - Capacity: Generally a PV will specify storage capacity. This is set by set the storage capacity of PV.
