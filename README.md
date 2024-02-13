@@ -31,7 +31,18 @@
 In an organization 3 branch will be there at any point.
 1. Feature branch, might be 0, 1 or 2 depends if there any new changes or bug need to enhance.
 2. Main branch always be 1
-3. Release branch can be carry multiple releases, customer can choose which release version they need to go for.
+3. Release branch can be carry multiple releases, customer can choose which release version they like to choose.
+
+**Another branch in an organization**
+
+Hotfix Branch: Suppose there might a critical bug in the latest release of an application version. So from that specific version which has a bug, we will create a Hotfix branch, we will fix the code in Hotfix branch
+and then we will merge the changes from Feature, Main and Release Branch.
+
+**Promote application from Dev env to Production env**
+
+
+
+
 
 
     
