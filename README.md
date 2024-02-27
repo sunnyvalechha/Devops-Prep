@@ -201,6 +201,26 @@ Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient 
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/20ce6dfa-8207-48a9-aec9-e20adf3b1f7e)
 
+# Pods gone into Pending state
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/ebcc9438-1484-49ac-b1b6-ca3f8a9a5859)
+
+  kubectl describe pod ckaexam
+
+  ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/bccc7440-475d-40a3-8a55-a07b410531b9)
+
+  Two other tains are scheduled, run below command this will un-taint the node
+
+  kubectl taint node kube-node2 cka=test:NoSchedule-
+
+  
+
+# OOM Killed - Out of Memory 
+
+OOM Killed - Limit Overcommit 
+OOM Killed - Container Limit Reached
+
+
 
 
 
