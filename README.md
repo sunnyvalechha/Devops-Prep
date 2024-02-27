@@ -230,13 +230,17 @@ systemctl enable kubelet --now
 cd /var/log/pods
 ls -lrth 
 
-Restart kube-api server if found any error.
+**Restart kube-api server if found any error.** Restart a service means restart pods
 
 method 1 - mv  kube-apiserver.yaml /tmp
 
 again move back to home location 
 
 mv /tmp/kube-apiserver.yaml .
+
+=========================================================================================================================
+
+
 
 
 
