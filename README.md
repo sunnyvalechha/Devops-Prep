@@ -84,7 +84,7 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
  ===========================================================================================
 
- **ImagePullBack Error**
+# ImagePullBackOff / ErrImagePull / Invalid Image Name  Error
 
   kubectl create deployment nginx-deploy --image=nginx 
 
@@ -101,6 +101,113 @@ Till above everything was fine, we have make error as image does not exit
   kubectl get pods -w 
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
+
+
+# Resource Quota Namespace
+
+kubectl create namespace payments
+
+vim qouta.yml
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: mem-cpu-demo
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 2Gi
+
+ kubectl apply -f quota.yml -n payments
+
+ kubectl describe ns payments 
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/f8d8b00a-89a3-4352-9654-711fec273f7e)
+
+  kubectl create deploy ngix-dep --image=nginx -n payments
+
+  kubectl get deploy -n payments
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/decd594d-9f2d-44a5-98c7-1893ef7f5cd6)
+
+In above, deployment is created but no pod in ready state, hence nothing found in get pods command 
+
+  kubectl describe deploy nginx-dep -n payments
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/c498fa5d-77df-4f1c-b076-ea7bc382ccb0)
+
+Here, if we found no error like 
+
+Crash Loop Back Off or Image Pull back error 
+
+our 1st approch should be, describe the deployment and find error.
+
+2nd approach to check logs of deployement
+
+3rd approach check events
+
+  kubectl get events --sort-by=.metadata.creationTimestamp
+
+So get the event and try to troubleshoot the error, In this case we need to increase the namespace memory allocations.
+
+
+# Crash Loop Back Off
+
+This error occur on runtime when runtime configration not working.
+
+Another example suppose we have python application is it working fine but it is trying to write on a folder which does not exist, or trying to write on folder which does not have permission to write.
+
+If there is an error with liveness probe it shows the same error.
+
+Example:
+vim dep.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        command: ["sh", "test.sh"]
+        securityContext:
+          runAsUser: 1001
+        volumeMounts:
+        - name: scripts
+          mountPath: /app
+      volumes:
+      - name: scripts
+        emptyDir: {}
+
+vim test.sh
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/1e1a3436-9342-4093-a03a-42ce47d28278)
+
+Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient permission, so the container trying again and again and going into Crash state.
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/20ce6dfa-8207-48a9-aec9-e20adf3b1f7e)
+
+
+
+
+
+# 
+
+
 
 
 
