@@ -80,4 +80,29 @@ and then we will merge the changes from Feature, Main and Release Branch.
   1. Read Only Many (ROX) - allows being mounted by multiple nodes in read-only mode.
   2. Read Write Once (RWO) - allows being mounted by a single node in read-write mode.
   3. Read Write Many (RWX) - allow multiple nodes to be mounted in read-write mode.
+ 
+
+ ===========================================================================================
+
+ **ImagePullBack Error**
+
+  kubectl create deployment nginx-deploy --image=nginx 
+
+  kubectl get pod -w
+
+  kubectl describe pod nginx-deploy..
+
+Till above everything was fine, we have make error as image does not exit
+
+  kubectl edit deployment nginx-deploy
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/dc16f29b-2f71-4266-95d7-c15b24d33f26)
+
+  kubectl get pods -w 
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
+
+
+
+ 
      
