@@ -218,9 +218,10 @@ Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient 
 # OOM Killed - Out of Memory 
 
 OOM Killed - Limit Overcommit 
+
 OOM Killed - Container Limit Reached
 
-
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/9b6756e5-26ee-4dd4-bc34-0d0a9dfd442c)
 
 
 
