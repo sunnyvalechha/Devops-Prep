@@ -204,8 +204,41 @@ Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient 
 
 
 
+# The connection to the server localhost:8080 was refused - did you specify the right host or port?
 
-# 
+cat /etc/kubernetes/manifest/kube-apiserver.yaml
+
+- --advertise-address=<IP ADDRESS>
+- --secure-port=<PORT NO.>
+
+**How to change config, if there is any mismatch**
+
+**Home directory of user have hidden directory called **.kube** change the following here**
+
+cat .kube/config
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/7b4adbc8-e656-4232-b7f8-938fc85346cb)
+
+**Might possible that API server is not running, check with kubelet service**
+
+systemctl status kubelet
+systemctl restart kubelet
+systemctl enable kubelet --now
+
+**Check Logs, On every worker node log directory created.**
+
+cd /var/log/pods
+ls -lrth 
+
+Restart kube-api server if found any error.
+
+method 1 - mv  kube-apiserver.yaml /tmp
+
+again move back to home location 
+
+mv /tmp/kube-apiserver.yaml .
+
+
 
 
 
