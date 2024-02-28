@@ -42,6 +42,9 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
 
 
+What is the Port range of Service Node-Port? 
+- 30,000 to 32,767
+
 
 
 
