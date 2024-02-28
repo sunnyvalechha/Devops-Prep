@@ -44,6 +44,9 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
 What are challenges with Prometheus? 
 
+# Docker
+What is side car container and when to use one? 
+
 # Kubernetes
 
 What is the Port range of Service Node-Port? 
@@ -57,6 +60,8 @@ What is Init containers and why do we need it ?
 Difference btw voluntary and Invouluntary distruption?
 What is Pod distruption budget ?
 What is Ingress controller ?
+What is Pod Security Policy ?
+
 
 
     
