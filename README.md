@@ -1,4 +1,4 @@
-# Devops-inter-prep
+# CI/CD Jenkins
 
 **What is difference between Continues Integration and Continues development?** 
 
@@ -40,12 +40,23 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
 **Promote application from Dev env to Production env**
 
+# Monitoring Grafana / Prometheus / Thanos
 
+What are challenges with Prometheus? 
+
+# Kubernetes
 
 What is the Port range of Service Node-Port? 
 - 30,000 to 32,767
 
-
+Kubernetes Pause containers ?
+How 2 containers are running in a single pod having single IP? 
+How do you handle kubernetes security? 
+How do you handle kubernetes secretes?
+What is Init containers and why do we need it ?
+Difference btw voluntary and Invouluntary distruption?
+What is Pod distruption budget ?
+What is Ingress controller ?
 
 
     
