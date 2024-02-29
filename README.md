@@ -50,8 +50,52 @@ What is side car container and when to use one?
 # Kubernetes
 
 What is the Port range of Service Node-Port? 
-- 30,000 to 32,767
 
+30,000 to 32,767
+
+ **- kubectl apply vs kubectl create**
+ 
+   * When running "kubectl create" command it calls the API server, API server then check if the same name available or not (webserver), if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
+  
+   * If we have to add an parameter of labels in same configuration again we run create command again same process repeats but this time we encouter an error called "Pod already exist"
+ 
+   * On the other side "kubectl apply" makes the changes also save the last-applied-configuration time-stamp under annotations and this does not interact with API to make changes instead directly inract with ETCD to update resources this compare Local configuration (yaml file) with Live configuration (kubectl get pod <pod-name> -o yaml). If there is any new changes found it will apply.
+
+   * apply --> used in production
+   * create --> do not used in prod environment
+  
+**- Manually Schedule a Pod**
+
+To check scheduler running or not, scheduler ran on kube-system namespace
+
+  kubectl get pods -n kube-system
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/f49631fa-c3f0-43c5-a8cb-e9cbc8d80d5c)
+
+Scheduler running as pod so first we have to stop the scheduler so that it can schedule pod automatically
+
+  mv /etc/kubernetes/manifests/kube-scheduler.yaml /etc/kubernetes/
+
+So if we run any pod it will go into Pending state because scheduler not present
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/a12cdb30-00a7-437d-8efe-812bd075543e)
+
+Now we will create a manifest and edit our node manually
+
+   kubectl run web2 --image=nginx --dry-run=client -o yaml > web2.yaml
+
+   cat web2.yaml
+
+ ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/cd5ab15b-5df4-4881-89fa-a238f9562030)
+
+ 
+
+
+
+
+   
+
+  
 - Kubernetes Pause containers ?
 - How 2 containers are running in a single pod having single IP? 
 - How do you handle kubernetes security? 
