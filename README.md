@@ -44,6 +44,31 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
 What are challenges with Prometheus? 
 
+# AWS
+1. difference in aws auto scaling vs ec2 auto scaling
+2. difference in launch template vs launch configuration
+3. who is publisher and who is consumer (sqs)
+4. cloudfront - uses and need
+5. when to choose s3 and when to cloudfront
+6. Iam roles vs policy
+7. aws lambda - use case
+8. lambda edge
+9. vertical scaling in lambda
+--------------------------------
+# Ansible
+1. Pull and push mechanism
+2. day to day task in ansible
+3. roles vs playbook
+4. playbook vs adhoc commands
+5. tags in ansible
+6. cowsay in ansible
+7. how to access variable in ansible 
+8. ansible facts 
+9. core, builtIn and extra module
+10. maintaining plugins in ansible
+11. type of ansible inventory and dynamic inventory (static / dynamic)
+12. idempotency
+
 # Docker
 What is side car container and when to use one? 
 
