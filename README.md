@@ -78,6 +78,18 @@ What is the Port range of Service Node-Port?
 
 30,000 to 32,767
 
+**How to Secure Kubernetes Cluster?**
+
+1. Secure your API server
+2. Very good with RBAC
+3. Cluster network policies are very well defined
+4. Information (Data) are encrypted at REST in ETCD
+5. Use Secure container Images
+6. Cluster Monitoring
+7. Frequent Upgrades
+
+
+
  **- kubectl apply vs kubectl create**
  
    * When running "kubectl create" command it calls the API server, API server then check if the same name available or not (webserver), if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
