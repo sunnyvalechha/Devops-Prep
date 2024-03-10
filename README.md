@@ -44,16 +44,60 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
 What are challenges with Prometheus? 
 
+# Git
+
+Git Fetch and Git Merge?
+* Git Fetch command download the latest changes from the remote repository to your local repository. It does not merge the changes into your current branch. Git pull is a alternative or for Git Fetch.
+* To merge the changes we need to run git merge 
+
+Head in Git?
+* Head refers to the currently checked-out branch's latest commit. However, in a detached HEAD state, the HEAD does not point to any branch but instead point to a specific commit or the remote repository.
+
+* What is git conflict and why does it occur?
+  A Git conflict occurs when you try to merge two branches that have conflicting changes. This can happen when two people are working on the same file at the same time, or when you merge a branch that has been updated since you last merged it.
+Git will try to automatically resolve the conflict, but sometimes it can't. When this happens, you'll need to manually resolve the conflict.
+To resolve a conflict, you'll need to open the conflicted file and decide which changes you want to keep. You can use a vim text editor to do this.
+
+* What is Git Stash?
+  Git stash is a command that saves your uncommitted changes to a temporary stack, so you can switch branches or work on something else without losing your changes. When you're ready to come back to your changes, you can apply the stash and they'll be restored to your working directory.
+
+* What is diffrence between Git and GitHub?
+   Git is a distributed version control system for tracking changes in source code during software development.
+  GitHub is a web-based Git repository hosting service.
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/b21fc9eb-110e-45ef-bbf7-97a6b75f4fde)
+
+* What is Git Rebase ?
+  Rebasing is the process of moving or combining a sequence of commits to a new base commit.
+
+* How to recover deleted branch after push to central repository?
+  Using the reflog:
+The reflog is a local log of all changes made to the repository, including deleted branches. To recover a deleted branch using the reflog, you can use the following command:
+
+   git reflog
+  
+
+
 # AWS
 1. difference in aws auto scaling vs ec2 auto scaling
 2. difference in launch template vs launch configuration
 3. who is publisher and who is consumer (sqs)
 4. cloudfront - uses and need
-5. when to choose s3 and when to cloudfront
-6. Iam roles vs policy
-7. aws lambda - use case
-8. lambda edge
-9. vertical scaling in lambda
+   Cloud Front is a caching service or a content delivery network where response of the request are cached at a location to reduce the latency.
+
+* Regional Egde cache in Cloud Front.
+A regional edge cache in Amazon CloudFront is a location that's deployed globally, close to viewers. They're located between the origin server and the global edge locations (PoPs). 
+
+* Geo Targeting in Cloud Front?
+  Geo-targeting in Amazon CloudFront is a feature that allows businesses to show personalized content to their audience based on their geographic location.
+
+  
+   
+6. when to choose s3 and when to cloudfront
+7. Iam roles vs policy
+8. aws lambda - use case
+9. lambda edge
+10. vertical scaling in lambda
 --------------------------------
 # Ansible
 1. Pull and push mechanism
