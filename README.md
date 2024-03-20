@@ -132,6 +132,14 @@ What is the Port range of Service Node-Port?
 6. Cluster Monitoring
 7. Frequent Upgrades
 
+1. When we run any command let's say 'kubectl get pods' the request first go to API server then API server validate with scheduler, but API server is first point of contact. So the suppose the cluster API server is not secure then the cluster itself can be compromised. So as a DevSecOps engineer we have to secure the API server.
+
+How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
+* In kubernetes every resource is a pod and API server should also have a pod / pod file. So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
+* Then secure this yaml file consist TLS certificates using RBAC
+
+
+
 
 
  **- kubectl apply vs kubectl create**
