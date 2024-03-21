@@ -132,15 +132,69 @@ What is the Port range of Service Node-Port?
 6. Cluster Monitoring
 7. Frequent Upgrades
 
-1. When we run any command let's say 'kubectl get pods' the request first go to API server then API server validate with scheduler, but API server is first point of contact. So the suppose the cluster API server is not secure then the cluster itself can be compromised. So as a DevSecOps engineer we have to secure the API server.
+Secure your API server - When we run any command let's say 'kubectl get pods' the request first go to API server then API server validate with scheduler, but API server is first point of contact. So the suppose the cluster API server is not secure then the cluster itself can be compromised. So as a DevSecOps engineer we have to secure the API server.
 
 How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
 * In kubernetes every resource is a pod and API server should also have a pod / pod file. So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
 * Then secure this yaml file consist TLS certificates using RBAC
 
 
+# Encrypting Secrets in etcd (Kubernetes Security)
+
+    kubectl get secret
+
+    kubectl create secret generic new-secret-1 --from-literal=somekey=somevalue
+
+    k describe secret new-secret-1
+
+![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/be4cb6be-6203-4b21-9cee-0e72d057884e)
+
+Note: Anyone who have bad intension and have knowledge of K8 can decode the secret we can see in above image. This text is Encoded not Encrypted. Encoded with base64.
+
+How to see the value of somekey?  >> 
+
+    kubectl get secret -o yaml
+    
+    kubectl get secret -o yaml > secret.yaml
+
+![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/98b26fb1-d06c-496c-a107-5c29d9798a00)
 
 
+    echo c29tZXZhbHVl | base64 --decode
+
+![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/d4f0dda5-b873-4871-8502-41676f3233bc)
+
+Note: So this can be seen very easily, even in ETCD it is stored in plain text, check out below
+
+    k get pods -n kube-system
+
+![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/9bc22a6c-0ed5-42f7-857d-1171567c2b16)
+
+Get the certificates first, because to access the ETCD pod we need this authentication
+
+    grep etcd /etc/kubernetes/manifests/kube-apiserver.yaml
+
+    - --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
+    - --etcd-certfile=/etc/kubernetes/pki/apiserver-etcd-client.crt
+    - --etcd-keyfile=/etc/kubernetes/pki/apiserver-etcd-client.key
+    - --etcd-servers=https://127.0.0.1:2379
+
+    controlplane $ kubectl -n kube-system exec -it etcd-controlplane -- sh -c \
+    > "ETCDCTL_API=3 ETCDCTL_CACERT=/etc/kubernetes/pki/etcd/ca.crt \
+    > ETCDCTL_CERT=/etc/kubernetes/pki/etcd/server.crt \
+    > ETCDCTL_KEY=/etc/kubernetes/pki/etcd/server.key \
+    > etcdctl --endpoints=https://127.0.0.1:2379 get /registry/secrets/default/new-secret-1"
+
+ ![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/c1f78158-6985-427f-b5aa-9a2b0fa583c7)
+
+    head -c 32 /dev/random | base64
+
+    
+
+   
+
+   
+    
 
  **- kubectl apply vs kubectl create**
  
