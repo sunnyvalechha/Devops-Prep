@@ -189,6 +189,8 @@ Get the certificates first, because to access the ETCD pod we need this authenti
 
     head -c 32 /dev/random | base64
 
+   
+
     
 
    
