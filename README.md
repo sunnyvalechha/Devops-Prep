@@ -187,18 +187,32 @@ Get the certificates first, because to access the ETCD pod we need this authenti
 
  ![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/c1f78158-6985-427f-b5aa-9a2b0fa583c7)
 
+ Below command is to generate a random encrpted code
+ 
     head -c 32 /dev/random | base64
 
-   
+    vim encryption.yaml
 
+ ![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/83f0e174-e24f-4c52-9816-2b870cd84bca)
+
+ Code copy from k8 doc: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
+
+ We are telling K8 to use this yaml file so moving file into pki folder but here main file is /etc/kubernetes/manifests/kube-apiserver.yaml
+
+    cp encryption.yaml /etc/kubernetes/pki/
+
+Open the file and add the path of "encryption.yaml" file at last and save, exit. 
+
+    vim /etc/kubernetes/manifests/kube-apiserver.yaml
+
+    - --encrption-provider-config=/etc/kubernetes/pki/encryption.yaml
     
+![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/c300a1ac-c140-4578-a22c-d8efafccd8b4)
 
-   
+So if we run the same command to see the secret in ETCD, the text will encrypted BUT if we run "echo c29tZXZhbHVl | base64 --decode" the text is still exposed.
 
-   
-    
 
- **- kubectl apply vs kubectl create**
+ # kubectl apply vs kubectl create
  
    * When running "kubectl create" command it calls the API server, API server then check if the same name available or not (webserver), if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
   
