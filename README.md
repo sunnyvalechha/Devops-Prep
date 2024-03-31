@@ -124,6 +124,8 @@ What is the Port range of Service Node-Port?
 
 **How to Secure Kubernetes Cluster?**
 
+* Secured sensitive information on Kubernetes cluster
+
 1. Secure your API server
 2. Very good with RBAC
 3. Cluster network policies are very well defined
@@ -210,6 +212,12 @@ Open the file and add the path of "encryption.yaml" file at last and save, exit.
 ![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/c300a1ac-c140-4578-a22c-d8efafccd8b4)
 
 So if we run the same command to see the secret in ETCD, the text will encrypted BUT if we run "echo c29tZXZhbHVl | base64 --decode" the text is still exposed.
+
+**Enforce automated k8s cluster security using kyverno generator and ArgoCD**
+
+Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance. It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
+
+
 
 
  # kubectl apply vs kubectl create
@@ -484,6 +492,9 @@ again move back to home location
 mv /tmp/kube-apiserver.yaml .
 
 =========================================================================================================================
+
+Secured sensitive information on Kubernetes cluster:
+* Kyverno, RBAC, Secure your API server, Cluster network policies are very well defined, Information (Data) are encrypted at REST in ETCD, Use Secure container Images, Cluster Monitoring, Frequent Upgrades.
 
 
 
