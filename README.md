@@ -496,6 +496,7 @@ mv /tmp/kube-apiserver.yaml .
 Secured sensitive information on Kubernetes cluster:
 * Kyverno, RBAC, Secure your API server, Cluster network policies are very well defined, Information (Data) are encrypted at REST in ETCD, Use Secure container Images, Cluster Monitoring, Frequent Upgrades.
 
+Managed and maintained Kubernetes cluster ensuring high availability and scalability of containerized applications
 
 
 
