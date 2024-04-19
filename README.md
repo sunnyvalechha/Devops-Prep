@@ -497,7 +497,20 @@ and then we will merge the changes from Feature, Main and Release Branch.
 **Promote application from Dev env to Production env**
 
 
+D2D Tasks:
+1. Observability and Monitoring: Start the day from going through the email if we have an email related to any critical alerts so we start work upon it and if there is any warning alert on the cluster to we check the warnings.
+2. Requirement Check: Check if there any requirement for Patching (upgrade any node through yum or any service version upgrade called patching) or if there is new version available which we need to upgrade in EKS of kubernetes so we raise a ticket and start working on it.
+3. Billing Review: We generate the monthly billing report and share with the higher management to review of monthly Aws Cloud enviroment.
+4. Security Issues: D2D work upon the Aws cloud landing zone where we identify and mitigate if there is any security breach in our cluster example any security group have created for the application which having unnecessary ports open so we give a check on that using services like Security Hub and AWS Trusted Advisor.
+5. Monitoring: We have setup Cloudwatch dashboard for our different application we provide that dashboard to application team we also have configured alarms and alerts as well using SES and SNS
 
+
+
+Aws Landing Zone ?
+Which Aws instance (flavour) and how many is used to support Cloudera cluster ?
+How many pods we can create in __ type of instance and __ size if we have these much of nodes ?
+How much pods EKS supports per worker node ?
+Cloudwatch, SNS, SES 
 
 
 
