@@ -508,10 +508,10 @@ and then we will merge the changes from Feature, Main and Release Branch.
 
 
 Aws Landing Zone ?
-Which Aws instance (flavour) and how many is used to support Cloudera cluster ?
-How many pods we can create in __ type of instance and __ size if we have these much of nodes ?
-How much pods EKS supports per worker node ?
-Cloudwatch, SNS, SES 
+* Which Aws instance (flavour) and how many is used to support Cloudera cluster ?
+* How many pods we can create in __ type of instance and __ size if we have these much of nodes ?
+* How much pods EKS supports per worker node ?
+* Cloudwatch, SNS, SES 
 
 
 
