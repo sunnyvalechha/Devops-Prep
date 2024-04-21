@@ -497,7 +497,8 @@ and then we will merge the changes from Feature, Main and Release Branch.
 **Promote application from Dev env to Production env**
 
 
-D2D Tasks:
+# D2D Tasks:
+
 1. Observability and Monitoring: Start the day from going through the email if we have an email related to any critical alerts so we start work upon it and if there is any warning alert on the cluster to we check the warnings.
 2. Requirement Check: Check if there any requirement for Patching (upgrade any node through yum or any service version upgrade called patching) or if there is new version available which we need to upgrade in EKS of kubernetes so we raise a ticket and start working on it.
 3. Billing Review: We generate the monthly billing report and share with the higher management to review of monthly Aws Cloud enviroment.
