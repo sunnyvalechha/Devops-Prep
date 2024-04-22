@@ -1,6 +1,9 @@
-# Monitoring Grafana / Prometheus / Thanos
+# Monitoring with Grafana / Prometheus / Thanos
 
 What are challenges with Prometheus? 
+
+# Blue and Green Deployments
+Ans: 
 
 # Git
 
