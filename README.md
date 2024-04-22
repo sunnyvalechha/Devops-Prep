@@ -99,8 +99,8 @@ How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
 * Then secure this yaml file consist TLS certificates using RBAC
 
 
-# Encrypting Secrets in etcd (Kubernetes Security)
-
+**Encrypting Secrets in etcd (Kubernetes Security)**
+    
     kubectl get secret
 
     kubectl create secret generic new-secret-1 --from-literal=somekey=somevalue
@@ -178,7 +178,7 @@ Kyverno is a policy engine for Kubernetes that helps platform engineering teams 
 
 
 
- # kubectl apply vs kubectl create
+ **kubectl apply vs kubectl create**
  
    * When running "kubectl create" command it calls the API server, API server then check if the same name available or not (webserver), if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
   
@@ -191,7 +191,7 @@ Kyverno is a policy engine for Kubernetes that helps platform engineering teams 
    * apply --> used in production
    * create --> do not used in prod environment
   
-**- Manually Schedule a Pod**
+**Manually Schedule a Pod**
 
 To check scheduler running or not, scheduler ran on kube-system namespace
 
@@ -235,12 +235,6 @@ Now we will create a manifest and edit our node manually
 
 
 
-    
-
-**Difference between Monolithic and Microservices?**
-
-**Explain Kubernetes architecture.**
-
 **What is kubernetes and why it is so popular in container orchestration?**
 
 - because in kubernetes we can managed the life cycle for your deployment in a single environment, there are lot of tools like helm charts and custom operators we can write so we can customize our environment, it can be run in any cloud or without cloud we can run the same image in multiple environments.
@@ -274,7 +268,7 @@ Now we will create a manifest and edit our node manually
 
  ===========================================================================================
 
-# ImagePullBackOff / ErrImagePull / Invalid Image Name  Error
+**ImagePullBackOff / ErrImagePull / Invalid Image Name Error**
 
   kubectl create deployment nginx-deploy --image=nginx 
 
@@ -293,22 +287,22 @@ Till above everything was fine, we have make error as image does not exit
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
 
 
-# Resource Quota Namespace
+**Resource Quota Namespace**
 
 kubectl create namespace payments
 
 vim qouta.yml
 
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: mem-cpu-demo
-spec:
-  hard:
-    requests.cpu: "1"
-    requests.memory: 1Gi
-    limits.cpu: "2"
-    limits.memory: 2Gi
+    apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: mem-cpu-demo
+    spec:
+    hard:
+      requests.cpu: "1"
+      requests.memory: 1Gi
+      limits.cpu: "2"
+      limits.memory: 2Gi
 
  kubectl apply -f quota.yml -n payments
 
@@ -343,7 +337,7 @@ our 1st approch should be, describe the deployment and find error.
 So get the event and try to troubleshoot the error, In this case we need to increase the namespace memory allocations.
 
 
-# Crash Loop Back Off
+**Crash Loop Back Off**
 
 This error occur on runtime when runtime configration not working.
 
@@ -405,17 +399,18 @@ Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient 
 
   
 
-# OOM Killed - Out of Memory 
+**OOM Killed - Out of Memory 
 
 OOM Killed - Limit Overcommit 
 
-OOM Killed - Container Limit Reached
+OOM Killed - Container Limit Reached**
+
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/9b6756e5-26ee-4dd4-bc34-0d0a9dfd442c)
 
 
 
-# The connection to the server localhost:8080 was refused - did you specify the right host or port?
+**The connection to the server localhost:8080 was refused - did you specify the right host or port?**
 
 cat /etc/kubernetes/manifest/kube-apiserver.yaml
 
@@ -451,10 +446,12 @@ mv /tmp/kube-apiserver.yaml .
 
 =========================================================================================================================
 
-Secured sensitive information on Kubernetes cluster:
+**Secured sensitive information on Kubernetes cluster**
+
 * Kyverno, RBAC, Secure your API server, Cluster network policies are very well defined, Information (Data) are encrypted at REST in ETCD, Use Secure container Images, Cluster Monitoring, Frequent Upgrades.
 
-Managed and maintained Kubernetes cluster ensuring high availability and scalability of containerized applications# CI/CD Jenkins
+
+# Jenkins CICD Pipeline
 
 **What is difference between Continues Integration and Continues development?** 
 
