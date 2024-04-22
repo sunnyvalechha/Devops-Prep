@@ -273,6 +273,14 @@ Now we will create a manifest and edit our node manually
 
 **ImagePullBackOff / ErrImagePull / Invalid Image Name Error**
 
+Two scenerios can be there:
+1. Image is not present in a repository like Docker Hub
+   Image name is written wrong mistakenly
+
+2. Image is Private and you don't have access to the registry (Permission Denied).
+
+Practical:-
+
   kubectl create deployment nginx-deploy --image=nginx 
 
   kubectl get pod -w
