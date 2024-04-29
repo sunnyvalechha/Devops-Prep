@@ -226,7 +226,7 @@ Now we will create a manifest and edit our node manually
    
 
   
-- Kubernetes Pause containers ?
+- Kubernetes Pause containers ? - done on k8 full docs
 - How 2 containers are running in a single pod having single IP? 
 - How do you handle kubernetes security? 
 - How do you handle kubernetes secretes?
