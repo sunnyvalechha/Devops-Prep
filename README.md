@@ -95,6 +95,43 @@ CMD ["manage.py", "runserver", "0.0.0.0:8000"]         # Start the process insid
 
 
 
+**Multi-stage builds**
+
+Practical:
+
+* Use ubuntu Ec2 instance.
+* Install docker
+* Install go lang: sudo apt  install golang-go
+* clone repo https://github.com/iam-veeramalla/Docker-Zero-to-Hero.git
+* cd /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build
+* Run calculator app: go run calculator.go
+
+![image](https://github.com/user-attachments/assets/2f717c15-41d9-4f01-ba8b-32e71396cd5d)
+
+Containerize this go app, Without multi-stage
+
+vim dockerfile-without-multistage/Dockerfile
+
+cd /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build/dockerfile-without-multistage
+
+    docker build -t calculator .
+
+    sudo docker images      # Image size is 650 MB
+
+Note: For the basic calculator app we don't require so heavy image
+
+Now use the multi-stage docker build image using Distroless images called SCRATCH
+
+Build the docker image present at /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build
+
+    sudo docker build -t simple-cal-multi .
+
+![image](https://github.com/user-attachments/assets/26319b06-90ab-43a9-9976-d9a53ace38bf)
+
+
+
+
+
 
 
 
