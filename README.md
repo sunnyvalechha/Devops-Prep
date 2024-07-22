@@ -91,7 +91,7 @@ RUN apt-get update && pip install requirement.txt      # Execute commands while 
 
 ENTRYPOINT ["python3"]                                 # When we start the container the script or command mentioned here is executed (Cannot over write)
 
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]         # Start the process inside the container (Can be over write)
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]         # Start the process inside the container (Can be over write, means if port 8000 is occupied already we can change but if would have mentiond in ENTRYPOINT we cannot change)
 
 
 
