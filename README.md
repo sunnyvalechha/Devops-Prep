@@ -135,9 +135,6 @@ Find: Distroless images on google: Distroless Container Images
 
 
 
-
-
-
 # Kubernetes
 
 What is the Port range of Service Node-Port? 
