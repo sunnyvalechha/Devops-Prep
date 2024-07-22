@@ -81,6 +81,8 @@ What is side car container and when to use one?
 
 FROM ubuntu / Centos / tomcat / golang                 # Represent the base Image. This command executes first when we start building the Image.
 
+VOLUME ["/newdirectory"]                               # Attach a volume inside the container, and with this volume we can attach a local directory called volume mount.
+
 WORKDIR /app                                           # Once the source code build, will store in this directory
 
 COPY <source> <destination>                            # Copy the dependencies from local system to image
