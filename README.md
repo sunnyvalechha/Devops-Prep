@@ -75,7 +75,27 @@ A regional edge cache in Amazon CloudFront is a location that's deployed globall
 12. idempotency
 
 # Docker
-What is side car container and when to use one? 
+What is side car container and when to use one?
+
+**Dockerfile**
+
+FROM ubuntu / Centos / tomcat / golang                 # Represent the base Image. This command executes first when we start building the Image.
+
+WORKDIR /app                                           # Once the source code build, will store in this directory
+
+COPY <source> <destination>                            # Copy the dependencies from local system to image
+
+RUN apt-get update && pip install requirement.txt      # Execute commands while creating image
+
+ENTRYPOINT ["python3"]                                 # When we start the container the script or command mentioned here is executed (Cannot over write)
+
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]         # Start the process inside the container (Can be over write)
+
+
+
+
+
+
 
 # Kubernetes
 
