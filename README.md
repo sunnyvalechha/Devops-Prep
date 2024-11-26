@@ -9,9 +9,25 @@ Ans: In the current organization I take care of the automation part using Ansibl
      I ensure there should be continuous monitoring.
      I have automated the Testing process in the DevOps lifecycle.
    
-**Software Development Lifecycle.**
+# Software Development Lifecycle
+
+There are 3 major phases of SDLC Design, Development, and Test
+
+Example: 
+1. There is an E-commerce website called Flipkart or Amazon and the website has the requirement to add a kids section on their website.
+2. 1st is requirement.
+3. 2nd phase will be planning.
+4. 3rd phase is defining.
+5. 4th phase is designing
+6. Building
+7. Testing
+8. Deploy
+
+![image](https://github.com/user-attachments/assets/b3cc149e-5963-4d4e-91c0-df7b8b727433)
 
 
+
+   
 
 
 
