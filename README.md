@@ -25,6 +25,12 @@ Example:
 
 ![image](https://github.com/user-attachments/assets/b3cc149e-5963-4d4e-91c0-df7b8b727433)
 
+These days every organization follows the Agile methodology.
+
+* Agile methodology: In Agile we follow all the above steps but we do not wait till all the planning is done, hence we will take short sprints like don't wait till all the design documents are done, if the small chunk is done we start the process then again there is the progress we again build.
+
+
+
 
 
    
