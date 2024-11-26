@@ -1,3 +1,27 @@
+1. What is DevOps?
+Ans: It is a culture that improves application delivery by ensuring proper automation, quality checks, monitoring or observability, and testing.
+3. Why is DevOps important?
+4. Introduce yourself.
+Ans: I am working as a DevOps engineer. I have an overall experience of 6 years. I started my career as a System Administrator and Platform engineer, specifically in DevOps, where I have more than 3 years of experience.
+6. What are your day-to-day activities?
+Ans: In the current organization I take care of the automation part using Ansible.
+     I ensure that quality should be maintained for the application.
+     I ensure there should be continuous monitoring.
+     I have automated the Testing process in the DevOps lifecycle.
+   
+**Software Development Lifecycle.**
+
+
+
+
+
+
+
+
+
+
+
+
 # Monitoring with Grafana / Prometheus / Thanos
 
 What are challenges with Prometheus? 
