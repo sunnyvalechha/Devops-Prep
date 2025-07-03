@@ -47,8 +47,6 @@ These days every organization follows the Agile methodology.
 # Monitoring with Grafana / Prometheus / Thanos
 
 What are challenges with Prometheus? 
-
-# Blue and Green Deployments
 Ans: 
 
 # Git
@@ -204,6 +202,8 @@ Secure your API server - When we run any command let's say 'kubectl get pods' th
 How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
 * In kubernetes every resource is a pod and API server should also have a pod / pod file. So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
 * Then secure this yaml file consist TLS certificates using RBAC
+
+**Blue and Green Deployments**
 
 
 **Encrypting Secrets in etcd (Kubernetes Security)**
