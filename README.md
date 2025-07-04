@@ -8,6 +8,11 @@ Ans: In the current organization I take care of the automation part using Ansibl
      I ensure that quality should be maintained for the application.
      I ensure there should be continuous monitoring.
      I have automated the Testing process in the DevOps lifecycle.
+
+# Terraform
+
+1. Migration resource to Terraform. How?
+2. 
    
 # Software Development Lifecycle
 
