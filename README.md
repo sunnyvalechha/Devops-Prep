@@ -571,16 +571,19 @@ mv /tmp/kube-apiserver.yaml .
 * Kyverno, RBAC, Secure your API server, Cluster network policies are very well defined, Information (Data) are encrypted at REST in ETCD, Use Secure container Images, Cluster Monitoring, Frequent Upgrades.
 
 
-# Jenkins CICD Pipeline
+# Jenkins & CICD Pipeline
 
-**What is difference between Continues Integration and Continues development?** 
+- What type of Jenkins file are you following & Which agent you are using in Jenkins file?
+* Declaritive jenkins files and Docker agent as it is light weight in nature also prevents lot of installations. 
 
-**What is Jenkins declaritive pipeline?**
+- What is difference between Continues Integration and Continues development?
 
-**What are stages and flow of Jenkins CICD pipeline?**
-- Dev
-- Stage
-- Prod
+- What is Jenkins declaritive pipeline?
+
+- What are stages and flow of Jenkins CICD pipeline?
+* Dev
+* Stage
+* Prod
 
   * So the code will deploy to the target platform that is kubernetes with Continues Integration and Continues Delivery approach.
   * Let's say there is a user who want to make change in feature branch or any branch he is assign, in his version control system (GitHub).
