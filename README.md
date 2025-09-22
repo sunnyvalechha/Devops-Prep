@@ -234,9 +234,24 @@ A: In K8 service takes cares for a service discovery.
 * When there is multiple replicas of a pod requests has sent to the service and service splits between multiple replicas of pod.
 
 
-Q: 
+Q: Why is hardcoding pod IP communication is a bad practise? 
+A: A developer is new to K8 and he/she has hardcoded the Ip:
 
+* Frontend is Pod A
+* Backend is Pod B
+* Developer has hardcoded the IP of Pod B in enviroment variables of Pod A.
+* K8 pods are ephimeral in nature. Pods can go down due to resource of crashloopbackoff or any other issue.
+* Whenever a pod goes donw an Ip of the pod changed. If we hardcode the value of Pod B in pod A's env variable this communication fails and leads to 502 bad gateway error to the clients.
+* To avoid this K8 uses a concept called services. Services does not rely on Ip address but it uses a algorithm called Labels & selectors.
 
+Q: Types of Services in Kubernetes?
+A: Various types of Services in K8 majorily 3 types but it also depends on the scope of access. 
+
+1. Cluster IP - Kubernetes service can only be access within the cluster. Any pod within the K8 cluster in any namespace can access the service using cluster IP or DNS name assocaite with the service. Scope of access is internal.
+2. Node Port - Kubernetes exposes special type of port on the K8 node. Access the service with node IP : port number exposed for the service. Scope of access is anyone who has access to the cluster node can access to the service.
+3. Load balancer - Enables public access to the K8 services. However LB service type only works on K8 cluster that has Cloud controller manager (CCM) component running on it.
+4. ExternalName: This not create a service like above but it enables external access through DNS name.
+5. Headless service: When we make cluster IP to none a Headless service is created, commonly used for stateful sets or DNS based service discovery.
 
 
 
