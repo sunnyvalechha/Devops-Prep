@@ -197,7 +197,7 @@ Find: Distroless images on google: Distroless Container Images
 * Primary component of Control Plane - API server, ETCD, Scheduler, Controler Manager.
 * Primary component of Data Plane - Kubelet, Container runtime, Kube proxy.
 
-* A request is sent to API server or a request is sent by 'kubectl' command to create deployment over the kubernetes cluster initially this request sent to API server.
+* When we run a 'kubectl' command to create deployment over the kubernetes cluster initially this request sent to API server.     
 * API server performs the authentication and authorization.
 * If the request is valid, it sends the request to the scheduler.
 * Then, scheduler decide on which node the pod has to be scheduled.
