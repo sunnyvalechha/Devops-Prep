@@ -12,7 +12,6 @@ Ans: In the current organization I take care of the automation part using Ansibl
 # Terraform
 
 1. Migration resource to Terraform. How?
-2. 
    
 # Software Development Lifecycle
 
@@ -108,7 +107,11 @@ A regional edge cache in Amazon CloudFront is a location that's deployed globall
 8. aws lambda - use case
 9. lambda edge
 10. vertical scaling in lambda
---------------------------------
+
+
+
+
+
 # Ansible
 1. Pull and push mechanism
 2. day to day task in ansible
@@ -124,29 +127,22 @@ A regional edge cache in Amazon CloudFront is a location that's deployed globall
 12. idempotency
 
 # Docker
-What is side car container and when to use one?
 
-**Dockerfile**
+Q: What is side car container and when to use one?
 
-FROM ubuntu / Centos / tomcat / golang                 # Represent the base Image. This command executes first when we start building the Image.
+Q: Dockerfile components?
 
-VOLUME ["/newdirectory"]                               # Attach a volume inside the container, and with this volume we can attach a local directory called volume mount.
-
-WORKDIR /app                                           # Once the source code build, will store in this directory
-
-COPY <source> <destination>                            # Copy the dependencies from local system to image
-
-RUN apt-get update && pip install requirement.txt      # Execute commands while creating image
-
-ENTRYPOINT ["python3"]                                 # When we start the container the script or command mentioned here is executed (Cannot over write)
-
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]         # Start the process inside the container (Can be over write, means if port 8000 is occupied already we can change but if would have mentiond in ENTRYPOINT we cannot change)
+          FROM ubuntu / Centos / tomcat / golang            # Represent the base Image. This command executes first when we start building the Image.
+          VOLUME ["/newdirectory"]                          # Attach a volume inside the container, and with this volume we can attach a local directory called volume mount.
+          WORKDIR /app                                           # Once the source code build, will store in this directory
+          COPY <source> <destination>                            # Copy the dependencies from local system to image
+          RUN apt-get update && pip install requirement.txt      # Execute commands while creating image
+          ENTRYPOINT ["python3"]                                 # When we start the container the script or command mentioned here is executed (Cannot over write)
+          CMD ["manage.py", "runserver", "0.0.0.0:8000"]         # Start the process inside the container (Can be over write, means if port 8000 is occupied already we can change but if would have mentiond in ENTRYPOINT we cannot change)
 
 
-
-**Multi-stage builds**
-
-Practical:
+Q: Multi-stage builds?
+- Practical:
 
 * Use ubuntu Ec2 instance.
 * Install docker
@@ -159,25 +155,24 @@ Practical:
 
 Containerize this go app, Without multi-stage
 
-vim dockerfile-without-multistage/Dockerfile
+     vim dockerfile-without-multistage/Dockerfile
 
-cd /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build/dockerfile-without-multistage
+     cd /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build/dockerfile-without-multistage
 
-    docker build -t calculator .
+     docker build -t calculator .
 
     sudo docker images      # Image size is 650 MB
 
 Note: For the basic calculator app we don't require so heavy image
 
-Now use the multi-stage docker build image using Distroless images called SCRATCH
-
-Build the docker image present at /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build
+* Now use the multi-stage docker build image using Distroless images called SCRATCH
+* Build the docker image present at /home/ubuntu/Docker-Zero-to-Hero/examples/golang-multi-stage-docker-build
 
     sudo docker build -t simple-cal-multi .
 
 ![image](https://github.com/user-attachments/assets/26319b06-90ab-43a9-9976-d9a53ace38bf)
 
-Find: Distroless images on google: Distroless Container Images 
+* Find: Distroless images on google: Distroless Container Images 
 
 
 
@@ -210,7 +205,7 @@ Find: Distroless images on google: Distroless Container Images
 * And whenever we create a deployment it is maintained by replica set controller, such controller are managed by controller manager component of Kubernetes. 
 
 Q: How various components of Kubernetes interact with each other?
-A: Here we need to explain what happens when "kubectl apply" command is executed on deployment or on pod. How any resource is created on cluster?
+- Here we need to explain what happens when "kubectl apply" command is executed on deployment or on pod. How any resource is created on cluster?
 
 * "kubectl apply -f deployment.yml" a request is sent to API server component.
 * API server perform authenticate & authorization to see if user has right permission to apply configuration.
@@ -255,14 +250,13 @@ A: Various types of Services in K8 majorily 3 types but it also depends on the s
 
 
 
-Q
+Q: 
 
 
 
 
 
-
-- How to Secure Kubernetes Cluster?
+Q: How to Secure Kubernetes Cluster?
 
 1. Secure your API server
 2. Secured sensitive information on Kubernetes cluster
@@ -282,10 +276,10 @@ Q
 * So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
 * Then secure this yaml file consist TLS certificates using RBAC
 
-**Blue and Green Deployments**
+Q: Blue and Green Deployments?
 
 
-**Encrypting Secrets in etcd (Kubernetes Security)**
+Q: Encrypting Secrets in etcd (Kubernetes Security)?
     
     kubectl get secret
     kubectl create secret generic new-secret-1 --from-literal=somekey=somevalue
@@ -354,41 +348,39 @@ Open the file and add the path of "encryption.yaml" file at last and save, exit.
 
 So if we run the same command to see the secret in ETCD, the text will encrypted BUT if we run "echo c29tZXZhbHVl | base64 --decode" the text is still exposed.
 
-**Enforce automated k8s cluster security using kyverno generator and ArgoCD**
+Q: Enforce automated k8s cluster security using kyverno generator and ArgoCD?
+- Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance. It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
 
-* Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance. It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
 
+Q: kubectl apply vs kubectl create?
 
- **kubectl apply vs kubectl create**
- 
-   * When running "kubectl create" command it calls the API server.
-   * API server then check if the same name available or not (webserver)
-   * if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
-   * If we have to add a parameter of labels in same configuration again we run 'create' command again and same process repeats but this time we encouter an error called "Pod already exist"
-   * On the other side "kubectl apply" makes the changes also save the last-applied-configuration time-stamp under annotations and this does not interact with API to make changes instead directly inract with ETCD to update resources this compare Local configuration (yaml file) with Live configuration (kubectl get pod <pod-name> -o yaml). If there is any new changes found it will apply.
+* When running "kubectl create" command it calls the API server.
+* API server then check if the same name available or not (webserver)
+* if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
+* If we have to add a parameter of labels in same configuration again we run 'create' command again and same process repeats but this time we encouter an error called "Pod already exist"
+* On the other side "kubectl apply" makes the changes also save the last-applied-configuration time-stamp under annotations and this does not interact with API to make changes instead directly inract with ETCD to update resources this compare Local configuration (yaml file) with Live configuration (kubectl get pod <pod-name> -o yaml). If there is any new changes found it will apply.
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/a806184d-d29a-44a8-b7cb-31ecfa0e323c)
 
-   * apply --> used in production
-   * create --> do not used in prod environment
+* apply --> used in production
+* create --> do not used in prod environment
   
-**Manually Schedule a Pod**
-
-To check scheduler running or not, scheduler ran on kube-system namespace
+Q: Manually Schedule a Pod?
+- To check scheduler running or not, scheduler ran on kube-system namespace
 
   kubectl get pods -n kube-system
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/f49631fa-c3f0-43c5-a8cb-e9cbc8d80d5c)
 
-Scheduler running as pod so first we have to stop the scheduler so that it can schedule pod automatically
+* Scheduler running as pod so first we have to stop the scheduler so that it can schedule pod automatically
 
   mv /etc/kubernetes/manifests/kube-scheduler.yaml /etc/kubernetes/
 
-So if we run any pod it will go into Pending state because scheduler not present
+* So if we run any pod it will go into Pending state because scheduler not present
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/a12cdb30-00a7-437d-8efe-812bd075543e)
 
-Now we will create a manifest and edit our node manually
+* Now we will create a manifest and edit our node manually
 
    kubectl run web2 --image=nginx --dry-run=client -o yaml > web2.yaml
 
@@ -408,27 +400,21 @@ Now we will create a manifest and edit our node manually
 - What is Ingress controller ?
 - What is Pod Security Policy ?
 
-
-
-**What is kubernetes and why it is so popular in container orchestration?**
-
+Q: What is kubernetes and why it is so popular in container orchestration?**
 - because in kubernetes we can managed the life cycle for your deployment in a single environment, there are lot of tools like helm charts and custom operators we can write so we can customize our environment, it can be run in any cloud or without cloud we can run the same image in multiple environments.
 
-**What is the difference between a Pod and a Deployment in Kubernetes?**
-
+Q: What is the difference between a Pod and a Deployment in Kubernetes?
 - A pod is smallest deployment unit in kubernetes, a pod can contain one or more than container.
 - A deployment on the other hand, manages the deployment and scaling of pod. It ensures that specified number of replicas of a pod must running at any time. It also support the rolling update and rollbacks.
 
-**How does Kubernetes handle storage, and what are Persistent Volumes (PV) and Persistent Volume Claims (PVC)?**
-
+Q: How does Kubernetes handle storage, and what are Persistent Volumes (PV) and Persistent Volume Claims (PVC)?
 - Persistent volume is a way to define the storage data to the pod. PV is a object in a kubernetes cluster.
 - To use Persistent volume it must be requested through Persistent volume clain (PVC). A PVC volume is a request for storage.
 - A PVC is used to mount a PV into a pod.
 - We can map different classes to different services levels and different backend policies.
 
 
-**Features of Persistent Volume**.
-
+Q: Features of Persistent Volume?
 - Capacity: Generally a PV will specify storage capacity. This is set by set the storage capacity of PV.
 - Volume Models: Kubernetes supports 2 volume modes of Persistent volume. A valid value for volume mode can be either file system or block. Filesystem is the default mode.
 - Access Modes:
@@ -437,40 +423,32 @@ Now we will create a manifest and edit our node manually
   3. Read Write Many (RWX) - allow multiple nodes to be mounted in read-write mode.
  
 
- ===========================================================================================
-
-**ImagePullBackOff / ErrImagePull / Invalid Image Name Error**
-
-Two scenerios can be there:
-1. Image is not present in a repository like Docker Hub
-   Image name is written wrong mistakenly
-
+Q: ImagePullBackOff / ErrImagePull / Invalid Image Name Error?
+- Two scenerios can be there:
+1. Image is not present in a repository like Docker Hub Image name is written wrong mistakenly
 2. Image is Private and you don't have access to the registry (Permission Denied).
 
-Practical:-
+- Practical:-
 
-  kubectl create deployment nginx-deploy --image=nginx 
+     kubectl create deployment nginx-deploy --image=nginx 
+     kubectl get pod -w
+     kubectl describe pod nginx-deploy..
 
-  kubectl get pod -w
+* Till above everything was fine, we have make error as image does not exit
 
-  kubectl describe pod nginx-deploy..
-
-Till above everything was fine, we have make error as image does not exit
-
-  kubectl edit deployment nginx-deploy
+     kubectl edit deployment nginx-deploy
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/dc16f29b-2f71-4266-95d7-c15b24d33f26)
 
-  kubectl get pods -w 
+     kubectl get pods -w 
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
 
 
-**Resource Quota Namespace**
+Q: Resource Quota Namespace?
 
-kubectl create namespace payments
-
-vim qouta.yml
+     kubectl create namespace payments
+     vim qouta.yml
 
     apiVersion: v1
     kind: ResourceQuota
@@ -484,77 +462,63 @@ vim qouta.yml
       limits.memory: 2Gi
 
  kubectl apply -f quota.yml -n payments
-
  kubectl describe ns payments 
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/f8d8b00a-89a3-4352-9654-711fec273f7e)
 
-  kubectl create deploy ngix-dep --image=nginx -n payments
-
-  kubectl get deploy -n payments
+     kubectl create deploy ngix-dep --image=nginx -n payments
+     kubectl get deploy -n payments
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/decd594d-9f2d-44a5-98c7-1893ef7f5cd6)
 
-In above, deployment is created but no pod in ready state, hence nothing found in get pods command 
+* In above, deployment is created but no pod in ready state, hence nothing found in get pods command 
 
-  kubectl describe deploy nginx-dep -n payments
+     kubectl describe deploy nginx-dep -n payments
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/c498fa5d-77df-4f1c-b076-ea7bc382ccb0)
 
-Here, if we found no error like 
+* Here, if we found no error like Crash Loop Back Off or Image Pull back error our 1st approch should be, describe the deployment and find error and 2nd approach to check logs of deployement 3rd approach check events
 
-Crash Loop Back Off or Image Pull back error 
+     kubectl get events --sort-by=.metadata.creationTimestamp
 
-our 1st approch should be, describe the deployment and find error.
-
-2nd approach to check logs of deployement
-
-3rd approach check events
-
-  kubectl get events --sort-by=.metadata.creationTimestamp
-
-So get the event and try to troubleshoot the error, In this case we need to increase the namespace memory allocations.
+* So get the event and try to troubleshoot the error, In this case we need to increase the namespace memory allocations.
 
 
-**Crash Loop Back Off**
+Q: Crash Loop Back Off error ?
+- This error occur on runtime when runtime configration not working.
+- Another example, suppose we have python application it is working fine but it is trying to write on a folder which does not exist, or trying to write on folder which does not have permission to write.
+- If there is an error with liveness probe it shows the same error.
 
-This error occur on runtime when runtime configration not working.
-
-Another example suppose we have python application is it working fine but it is trying to write on a folder which does not exist, or trying to write on folder which does not have permission to write.
-
-If there is an error with liveness probe it shows the same error.
-
-Example:
-vim dep.yaml
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-  labels:
-    app: nginx
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx-container
-        image: nginx:latest
-        command: ["sh", "test.sh"]
-        securityContext:
-          runAsUser: 1001
-        volumeMounts:
-        - name: scripts
-          mountPath: /app
-      volumes:
-      - name: scripts
-        emptyDir: {}
+          vim dep.yaml
+          
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: nginx-deployment
+            labels:
+              app: nginx
+          spec:
+            replicas: 1
+            selector:
+              matchLabels:
+                app: nginx
+            template:
+              metadata:
+                labels:
+                  app: nginx
+              spec:
+                containers:
+                - name: nginx-container
+                  image: nginx:latest
+                  command: ["sh", "test.sh"]
+                  securityContext:
+                    runAsUser: 1001
+                  volumeMounts:
+                  - name: scripts
+                    mountPath: /app
+                volumes:
+                - name: scripts
+                  emptyDir: {}
 
 vim test.sh
 
