@@ -209,6 +209,36 @@ Find: Distroless images on google: Distroless Container Images
 * Once the pod or any kubernetes resource is executed API server passes the information to ETCD.
 * And whenever we create a deployment it is maintained by replica set controller, such controller are managed by controller manager component of Kubernetes. 
 
+Q: How various components of Kubernetes interact with each other?
+A: Here we need to explain what happens when "kubectl apply" command is executed on deployment or on pod. How any resource is created on cluster?
+
+* "kubectl apply -f deployment.yml" a request is sent to API server component.
+* API server perform authenticate & authorization to see if user has right permission to apply configuration.
+* If user is authorized to create a pod API server forwards the request to the scheduler.
+* Scheduler identifies which node of the k8 cluster is right to place the pod.
+* Once the decision is made API server talks to the kubelet on that particular node and runs the pod on that node.
+* Then, kubelet invokes container runtime and container runtime takes care to run the container.
+* This is how a pod is run on the K8 cluster.
+* Once the pod is ran it updates to information on to ETCD that makes the object persistent on the cluster.
+* If there is an issue with the pod and pod down the replication controller will create a replica of the pod and this task is done by the controller manager.
+
+
+Q: What is the purpose of Services in Kubernetes?
+A: In K8 service takes cares for a service discovery. 
+
+* E.g., When pod A wants to communicate with pod B, it can't do with the IP address because pod are ephimeral in nature and if pod B goes down IP is also changed.
+* So both Pod A and B will communicate with service not using the IP address but using Labels and Selectors.
+* Because service identifies the pods using labels & selectors request from pod A to B is never terminated.
+* Service acts as a middleman between pods.
+* Services can also help with the default Load balancing through round robin algorithm.
+* When there is multiple replicas of a pod requests has sent to the service and service splits between multiple replicas of pod.
+
+
+Q: 
+
+
+
+
 
 
 - How to Secure Kubernetes Cluster?
