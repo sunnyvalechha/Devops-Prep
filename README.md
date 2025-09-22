@@ -186,26 +186,49 @@ Find: Distroless images on google: Distroless Container Images
 
 # Kubernetes
 
-What is the Port range of Service Node-Port? 
+- What is the Port range of Service Node-Port?           # 30,000 to 32,767
 
-30,000 to 32,767
+- Explain kubernetes architecture and its key components?
 
-**How to Secure Kubernetes Cluster?**
+* Kubernetes architecture is broadly devided into 2 parts:
+  1. Control plane / Master component
+  2. Data plane / Worker nodes
 
-* Secured sensitive information on Kubernetes cluster
+* Primary component of Control Plane - API server, ETCD, Scheduler, Controler Manager.
+* Primary component of Data Plane - Kubelet, Container runtime, Kube proxy.
+
+* A request is sent to API server or a request is sent by 'kubectl' command to create deployment over the kubernetes cluster initially this request sent to API server.
+* API server performs the authentication and authorization.
+* If the request is valid, it sends the request to the scheduler.
+* Then, scheduler decide on which node the pod has to be scheduled.
+* It takes pod affinity, node affinity everything into consideration and identifies right nodes for the pod.
+* Once the scheduler identifies right node for the pod, API server forward the request to the kubelet on that particular node.
+* Kubelet invokes container runtime such as docker shim, CRI-o, or container D
+* Then, container runtime takes the responsibility of running the container within the pod.
+* This is how pod is executed using Kubernetes components.
+* Once the pod or any kubernetes resource is executed API server passes the information to ETCD.
+* And whenever we create a deployment it is maintained by replica set controller, such controller are managed by controller manager component of Kubernetes. 
+
+
+
+- How to Secure Kubernetes Cluster?
 
 1. Secure your API server
-2. Very good with RBAC
-3. Cluster network policies are very well defined
-4. Information (Data) are encrypted at REST in ETCD
-5. Use Secure container Images
-6. Cluster Monitoring
-7. Frequent Upgrades
+2. Secured sensitive information on Kubernetes cluster
+3. Very good with RBAC
+4. Cluster network policies are very well defined
+5. Information (Data) are encrypted at REST in ETCD
+6. Use Secure container Images
+7. Cluster Monitoring
+8. Frequent Upgrades
 
-Secure your API server - When we run any command let's say 'kubectl get pods' the request first go to API server then API server validate with scheduler, but API server is first point of contact. So the suppose the cluster API server is not secure then the cluster itself can be compromised. So as a DevSecOps engineer we have to secure the API server.
-
-How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
-* In kubernetes every resource is a pod and API server should also have a pod / pod file. So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
+* Secure your API server: When we run any command let's say 'kubectl get pods' the request first go to API server.
+* API server validate with scheduler, but API server is first point of contact.
+* So suppose the cluster API server is not secure then the cluster itself can be compromised.
+* So as a DevSecOps engineer we have to secure the API server first.
+* How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
+* In kubernetes every resource is a pod and API server should also have a pod / pod file.
+* So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
 * Then secure this yaml file consist TLS certificates using RBAC
 
 **Blue and Green Deployments**
@@ -214,9 +237,7 @@ How we will do that? >> /etc/kubernetes/manifest/kube-apiserserver.yaml
 **Encrypting Secrets in etcd (Kubernetes Security)**
     
     kubectl get secret
-
     kubectl create secret generic new-secret-1 --from-literal=somekey=somevalue
-
     k describe secret new-secret-1
 
 ![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/be4cb6be-6203-4b21-9cee-0e72d057884e)
@@ -226,7 +247,6 @@ Note: Anyone who have bad intension and have knowledge of K8 can decode the secr
 How to see the value of somekey?  >> 
 
     kubectl get secret -o yaml
-    
     kubectl get secret -o yaml > secret.yaml
 
 ![image](https://github.com/sunnyvalechha/Devops-Prep/assets/59471885/98b26fb1-d06c-496c-a107-5c29d9798a00)
@@ -285,17 +305,15 @@ So if we run the same command to see the secret in ETCD, the text will encrypted
 
 **Enforce automated k8s cluster security using kyverno generator and ArgoCD**
 
-Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance. It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
-
-
+* Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance. It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
 
 
  **kubectl apply vs kubectl create**
  
-   * When running "kubectl create" command it calls the API server, API server then check if the same name available or not (webserver), if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
-  
-   * If we have to add an parameter of labels in same configuration again we run create command again same process repeats but this time we encouter an error called "Pod already exist"
- 
+   * When running "kubectl create" command it calls the API server.
+   * API server then check if the same name available or not (webserver)
+   * if not it makes the entry in ETCD then ETCD instruct to the scheduler then response goes back to API and then kubelet create a pod on worker node.
+   * If we have to add a parameter of labels in same configuration again we run 'create' command again and same process repeats but this time we encouter an error called "Pod already exist"
    * On the other side "kubectl apply" makes the changes also save the last-applied-configuration time-stamp under annotations and this does not interact with API to make changes instead directly inract with ETCD to update resources this compare Local configuration (yaml file) with Live configuration (kubectl get pod <pod-name> -o yaml). If there is any new changes found it will apply.
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/a806184d-d29a-44a8-b7cb-31ecfa0e323c)
@@ -327,12 +345,6 @@ Now we will create a manifest and edit our node manually
 
  ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/cd5ab15b-5df4-4881-89fa-a238f9562030)
 
- 
-
-
-
-
-   
 
   
 - Kubernetes Pause containers ? - done on k8 full docs
@@ -350,10 +362,6 @@ Now we will create a manifest and edit our node manually
 **What is kubernetes and why it is so popular in container orchestration?**
 
 - because in kubernetes we can managed the life cycle for your deployment in a single environment, there are lot of tools like helm charts and custom operators we can write so we can customize our environment, it can be run in any cloud or without cloud we can run the same image in multiple environments.
-
-**Explain kubernetes and its key components?**
-
-- Pod :
 
 **What is the difference between a Pod and a Deployment in Kubernetes?**
 
