@@ -255,6 +255,12 @@ A: Various types of Services in K8 majorily 3 types but it also depends on the s
 
 
 
+Q
+
+
+
+
+
 
 - How to Secure Kubernetes Cluster?
 
