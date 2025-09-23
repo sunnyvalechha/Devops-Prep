@@ -310,9 +310,17 @@ Q: What is Headless service in Kubernetes and when did you use it?
 
 * Cluster Ip: None
 * DNS Name: <pod-name>.<headless-service-name>.<namespace>.svc.cluster.local | myapp-headless.default.svc.cluster.local
-* 
 
+Q: Can a Pod access service in different namespace. If yes, How?
 
+- If we create a default service in Kubernetes which is also a least privilege service we can easily access the pod in the cluster be it on any namespace.
+- We can access the service by using the name of the service "<pod-name>.<namespace>.svc.cluster.local" | "my-svc.default.svc.cluster.local"
+
+Q: Explain, how you can restrict access to db pod to only one app in the namespace?
+
+Scenerio:
+- There are 3 pods in a namespace and 1 
+-  
 
 
 Q: How to Secure Kubernetes Cluster?
