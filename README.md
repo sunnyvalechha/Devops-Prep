@@ -240,7 +240,7 @@ A: A developer is new to K8 and he/she has hardcoded the Ip:
 * To avoid this K8 uses a concept called services. Services does not rely on Ip address but it uses a algorithm called Labels & selectors.
 
 Q: Types of Services in Kubernetes?
-A: Various types of Services in K8 majorily 3 types but it also depends on the scope of access. 
+- Various types of Services in K8 majorily 3 types but it also depends on the scope of access. 
 
 1. Cluster IP - Kubernetes service can only be access within the cluster. Any pod within the K8 cluster in any namespace can access the service using cluster IP or DNS name assocaite with the service. Scope of access is internal.
 2. Node Port - Kubernetes exposes special type of port on the K8 node. Access the service with node IP : port number exposed for the service. Scope of access is anyone who has access to the cluster node can access to the service.
@@ -250,14 +250,54 @@ A: Various types of Services in K8 majorily 3 types but it also depends on the s
 
 Q: What are labels and Selectors in Kubernetes?
 
-- Labels are key value pairs that are used to group the resources.
-- Selectors are used for query purpose, services and replicasets in k8 used the concept of selectors to identify pods according to labels.
+- Labels are key value pairs that are used for identification and to grouping of resources.
+- Selectors are used for query purpose, services and replicasets use selectors to identify pods using labels.
 - Below snapshot we can identify labels with key:value pairs and on the left yaml same selector used to identify the correct pod then service route the traffic as per the labels.
 
 <img width="1800" height="657" alt="image" src="https://github.com/user-attachments/assets/830157c8-d29b-49d6-89b3-e6e16369f856" />
 
 
+Q: What would you recommend NodePort service or Load balancer type service and why?
 
+- Node Port service and Load balancer service are 2 types of service in Kubernetes.
+- There is a fine difference when it comes to Node Port service.
+- Node Port service is only accessible using the node IP, followed by the port associated. This means the scope of access is only to the people who can access this K8 node.
+- If the nodes are created within virtual private cloud that means people who have access to that VPC can only access service of type NodePort.
+- Load balance enables external access to the service.
+- Load balancer service type is only available on the kubernetes cluster which have Cloud Controller Manager (CCM) running on it.
+- On other clusters without CCM, even if we create service of type LB it will still work as NodePort service so it cannot be accessed outside the K8 cluster.
+
+
+Q: How Kubernetes Service is related to KubeProxy | How Kube Proxy works with Services?
+
+- In kubernetes primary purpose of services is Service Discovery.
+- And, kubernetes uses the concept of Services to communicate with multiple pods.
+- Pod A communicate with Service of Pod B and service does not identify the pod using the IP addresses. It uses Labels and Selectors.
+- Whenever we create a service, an endpoint is created associated with the IP address, which has the information of the Pods.
+- This endpoint is observed by the Kube Proxy.
+- Kube Proxy updates IP tables with the information that if request comes to IP "10.96.10.5" which is IP of the service, so forward the request to 2 replicas of Pod.
+- Kubernetes service is a resource that can select the pod and it can only work if you have kubeproxy and IP tables.
+
+$ Summary:
+
+- A kubernetes service is created.
+- Labels are associated to the pods.
+- Selectors are applied to the service.
+- Using selectors, service identifies the right pods and kubernetes created endpoint. This endpoint read by Kube Proxy.
+- Kube Proxy updates Ip tables.
+- Because, the information is updated in the IP tables when request is sent to the service, IP address requests are routed to the replicas of the pods.
+- This is how, service and kube proxy work together. 
+
+
+Q: Disadvantages of service type Load balancer?
+
+- Load balancer service type provisions a seperate external IP's and Load balancer instances for each services.
+- Suppose we have 10 services to expose to outside world so it creates 10 load balancers. It will increase the cost the the cloud.
+- It will be expensive and inefficient.
+
+Q: What is Headless service in Kubernetes and when did you use it?
+
+- 
 
 
 
