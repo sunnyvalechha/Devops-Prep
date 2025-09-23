@@ -297,7 +297,21 @@ Q: Disadvantages of service type Load balancer?
 
 Q: What is Headless service in Kubernetes and when did you use it?
 
-- 
+- Headless service is a type of service which we created as "Cluster IP" as "None" unlike traditional service it does not Load Balance the request between the pods but it enables Dns A record for each of the pod replica so that one pod can talk to the other pod using the DNS A record name.
+- It allows you to directly access the individual pods in a service.
+- A headless service does not have a cluster IP assigned to it. Instead of providing a single virtual IP address for the service, a headless service creates a DNS record for each pod associated with the service. These DNS records can then be used to directly address each pod.
+- Here, a backend pod want to communicate with the database through service but it should not route the traffic to diffrent pod everytime.
+- 1 pod must associate with 1 DB.
+- So it will create a DNS A record name that will 
+
+<img width="881" height="458" alt="image" src="https://github.com/user-attachments/assets/8765def1-2cdc-4b1e-8be5-3429cff9e323" />
+
+<img width="540" height="499" alt="image" src="https://github.com/user-attachments/assets/243ed528-ca9e-43fa-a273-92bf153e9d93" />
+
+* Cluster Ip: None
+* DNS Name: <pod-name>.<headless-service-name>.<namespace>.svc.cluster.local | myapp-headless.default.svc.cluster.local
+* 
+
 
 
 
