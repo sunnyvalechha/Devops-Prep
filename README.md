@@ -248,9 +248,14 @@ A: Various types of Services in K8 majorily 3 types but it also depends on the s
 4. ExternalName: This not create a service like above but it enables external access through DNS name.
 5. Headless service: When we make cluster IP to none a Headless service is created, commonly used for stateful sets or DNS based service discovery.
 
+Q: What are labels and Selectors in Kubernetes?
 
+- Labels are key value pairs that are used to group the resources.
+- Selectors are used for query purpose, services and replicasets in k8 used the concept of selectors to identify pods according to labels.
+- Below snapshot we can identify labels with key:value pairs and on the left yaml same selector used to identify the correct pod then service route the traffic as per the labels.
 
-Q: 
+<img width="1800" height="657" alt="image" src="https://github.com/user-attachments/assets/830157c8-d29b-49d6-89b3-e6e16369f856" />
+
 
 
 
