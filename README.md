@@ -192,20 +192,20 @@ Note: For the basic calculator app we don't require so heavy image
 * Primary component of Control Plane - API server, ETCD, Scheduler, Controler Manager.
 * Primary component of Data Plane - Kubelet, Container runtime, Kube proxy.
 
-* When we run a 'kubectl' command to create deployment over the kubernetes cluster initially this request sent to API server.     
+* When we run a 'kubectl' command to create resources on the kubernetes cluster initially this request sent to API server.     
 * API server performs the authentication and authorization.
 * If the request is valid, it sends the request to the scheduler.
 * Then, scheduler decide on which node the pod has to be scheduled.
-* It takes pod affinity, node affinity everything into consideration and identifies right nodes for the pod.
+* It takes pod affinity, node affinity, taints & tolerations everything into consideration and identifies right nodes for the pod.
 * Once the scheduler identifies right node for the pod, API server forward the request to the kubelet on that particular node.
-* Kubelet invokes container runtime such as docker shim, CRI-o, or container D
-* Then, container runtime takes the responsibility of running the container within the pod.
+* Kubelet calls container runtime such as docker shim, CRI-o, or container D
+* Then, container runtime takes the responsibility to run the container in the pod.
 * This is how pod is executed using Kubernetes components.
-* Once the pod or any kubernetes resource is executed API server passes the information to ETCD.
+* Once this kubernetes resource is executed API server passes the information to ETCD.
 * And whenever we create a deployment it is maintained by replica set controller, such controller are managed by controller manager component of Kubernetes. 
 
 Q: How various components of Kubernetes interact with each other?
-- Here we need to explain what happens when "kubectl apply" command is executed on deployment or on pod. How any resource is created on cluster?
+- Here we need to explain what happens when "kubectl apply" command is executed on deployment or on any resource. How any resources is created on cluster?
 
 * "kubectl apply -f deployment.yml" a request is sent to API server component.
 * API server perform authenticate & authorization to see if user has right permission to apply configuration.
@@ -214,19 +214,19 @@ Q: How various components of Kubernetes interact with each other?
 * Once the decision is made API server talks to the kubelet on that particular node and runs the pod on that node.
 * Then, kubelet invokes container runtime and container runtime takes care to run the container.
 * This is how a pod is run on the K8 cluster.
-* Once the pod is ran it updates to information on to ETCD that makes the object persistent on the cluster.
+* Once the pod runs, it updates to information on to ETCD that makes the object persistent on the cluster.
 * If there is an issue with the pod and pod down the replication controller will create a replica of the pod and this task is done by the controller manager.
 
 
 Q: What is the purpose of Services in Kubernetes?
 A: In K8 service takes cares for a service discovery. 
 
-* E.g., When pod A wants to communicate with pod B, it can't do with the IP address because pod are ephimeral in nature and if pod B goes down IP is also changed.
+* E.g., When pod A wants to communicate with pod B, it can't happen with the IP address because pods are ephimeral in nature and if any pod is goes down IP is also changed.
 * So both Pod A and B will communicate with service not using the IP address but using Labels and Selectors.
-* Because service identifies the pods using labels & selectors request from pod A to B is never terminated.
-* Service acts as a middleman between pods.
+* Because service identifies the pods using labels & selectors. 
+* Service acts as a middleman between pods, request from pod A to B is never terminated.
 * Services can also help with the default Load balancing through round robin algorithm.
-* When there is multiple replicas of a pod requests has sent to the service and service splits between multiple replicas of pod.
+* When there is multiple replicas of a pod, requests has sent to the service and service splits request between multiple replicas of pod.
 
 
 Q: Why is hardcoding pod IP communication is a bad practise? 
@@ -235,9 +235,9 @@ A: A developer is new to K8 and he/she has hardcoded the Ip:
 * Frontend is Pod A
 * Backend is Pod B
 * Developer has hardcoded the IP of Pod B in enviroment variables of Pod A.
-* K8 pods are ephimeral in nature. Pods can go down due to resource of crashloopbackoff or any other issue.
-* Whenever a pod goes donw an Ip of the pod changed. If we hardcode the value of Pod B in pod A's env variable this communication fails and leads to 502 bad gateway error to the clients.
-* To avoid this K8 uses a concept called services. Services does not rely on Ip address but it uses a algorithm called Labels & selectors.
+* K8 pods are ephimeral in nature. Pods can go down due to lack of resources or crashloopbackoff or any other issue.
+* Whenever a pod goes down an Ip of the pod changed. If we hardcode the value of Pod B in pod A's env variable this communication fails and leads to 502 bad gateway error to the clients.
+* To avoid this K8 uses a concept called service discovery. Services does not rely on Ip address but it uses a algorithm called Labels & selectors.
 
 Q: Types of Services in Kubernetes?
 - Various types of Services in K8 majorily 3 types but it also depends on the scope of access. 
