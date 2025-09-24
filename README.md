@@ -658,11 +658,24 @@ Q: Resource Quota Namespace?
 
 
 Q: Crash Loop Back Off error ?
-- This error occur on runtime when runtime configration not working.
-- Another example, suppose we have python application it is working fine but it is trying to write on a folder which does not exist, or trying to write on folder which does not have permission to write.
-- If there is an error with liveness probe it shows the same error.
 
-          vim dep.yaml
+- This is not an error actually this is a state in Kubernetes.
+- This occurs when for some reason or for some error your pod is continuesly crashing.
+- This occurs on runtime when runtime configration not working.
+- Suppose we have python application it is working fine but it is trying to write on a folder which does not exist, or trying to write on folder which does not have permission to write.
+- There might be a issue with the Liveness probe as well. Liveness probe checks if the application is Live.
+- Troubleshooting steps:
+
+  1. Check "kubectl log pod nginx"
+  2. Check "kubectl describe pod" if it shows any signs of error in the events.
+
+- Below snap, it might be issue with the path: /health
+
+<img width="1042" height="652" alt="image" src="https://github.com/user-attachments/assets/71a3f029-82fa-4adb-8ccf-697d5c70dff2" />
+
+- Depending upon the error we will work upon the solution.
+
+  		  vim dep.yaml
           
           apiVersion: apps/v1
           kind: Deployment
@@ -701,7 +714,7 @@ Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient 
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/20ce6dfa-8207-48a9-aec9-e20adf3b1f7e)
 
-# Pods gone into Pending state
+Q: Pods gone into Pending state
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/ebcc9438-1484-49ac-b1b6-ca3f8a9a5859)
 
