@@ -357,9 +357,34 @@ Q: Explain the Deployment strategy that you follow in your organinzation?
 * Once all traffic is routed to new ingress we will delete the old ingress.
 
 
+Q: Rollback strategy that you follow in your organization?
+
+- We follow Canary model of deployment where we gradually rollout new version of the application to the customers.
+- Initially the new version of the applicaion is only rolled out to 10% of users and rest are using old version of the application, then we gradually changed to 20%, 50% and 100%.
+- Suppose due to some reason still we faced issue in the production we will follow a "Rollback strategy"
+- Because we follow GitOps approach all our manifest are available in git repository.
+- So I revert Helm chart to the previous version, it made a change to git repository.
+- Because, ArgoCD is watching git repo and auto sync is enabled on Argo it will pick automatically the old version of helm chart and deploy on kubernetes cluster.
+- But, we try to avoid situations of rollbacks by following proper deployment strategies.
+
+ Q: Design a solution to avoid rollbacks?
+
+ - Here, interviewer is asking a deployment strategy.
+ - In our current organization we have already design such solution, so we follow canary model of deployment.
+ - As canary model we rollout new version of the application only to 10% of people for the first time.
+ - Gradually we increase the load %
+ - Becuase we follow this deployment strategy any issue can be caught at the early stages itself.
+ - Before going 100% live we take feedback on different layers.
+ - This is how we eliminate scenerios or rollbacks.
 
 
+Q: Explain the role of coreDNS in Kubernetes?
 
+- Core DNS takes care DNS in Kubernetes. It is the default DNS server on the K8 cluster.
+- It takes care of domain to ip address translation.
+- Example: Pod A needs to communicate with payment micro-service, so in pod's env variable or config map we use a dns name like "payment.default.svc.cluster.local"
+- When pod tries to communicate with DNS name, this DNS name is resolved to an IP address like 10.96.1.5
+- This resolution in K8 is performed by Core DNS.  
 
 
 
@@ -389,9 +414,6 @@ Q: How to Secure Kubernetes Cluster?
 * In kubernetes every resource is a pod and API server should also have a pod / pod file.
 * So this kube-api server has a yaml file we have to put TLS certs in the yaml file.
 * Then secure this yaml file consist TLS certificates using RBAC
-
-Q: Blue and Green Deployments?
-
 
 Q: Encrypting Secrets in etcd (Kubernetes Security)?
     
