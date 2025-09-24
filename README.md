@@ -423,15 +423,6 @@ Q: If a node is tainted as 'NoSchedule'. Can you still schedule a pod on a node?
      	    effect: NoSchedule
      	    
 
-
-
-
-
-
-
-
-
-
 Q: How to Secure Kubernetes Cluster?
 
 1. Secure your API server
@@ -522,7 +513,8 @@ Open the file and add the path of "encryption.yaml" file at last and save, exit.
 So if we run the same command to see the secret in ETCD, the text will encrypted BUT if we run "echo c29tZXZhbHVl | base64 --decode" the text is still exposed.
 
 Q: Enforce automated k8s cluster security using kyverno generator and ArgoCD?
-- Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance. It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
+- Kyverno is a policy engine for Kubernetes that helps platform engineering teams manage security, compliance, and governance.
+- It runs as a dynamic admission controller in a Kubernetes cluster, receiving HTTP callbacks from the Kubernetes API server and applying policies to enforce admission policies or reject requests. 
 
 
 Q: kubectl apply vs kubectl create?
@@ -596,26 +588,7 @@ Q: Features of Persistent Volume?
   3. Read Write Many (RWX) - allow multiple nodes to be mounted in read-write mode.
  
 
-Q: ImagePullBackOff / ErrImagePull / Invalid Image Name Error?
-- Two scenerios can be there:
-1. Image is not present in a repository like Docker Hub Image name is written wrong mistakenly
-2. Image is Private and you don't have access to the registry (Permission Denied).
 
-- Practical:-
-
-     kubectl create deployment nginx-deploy --image=nginx 
-     kubectl get pod -w
-     kubectl describe pod nginx-deploy..
-
-* Till above everything was fine, we have make error as image does not exit
-
-     kubectl edit deployment nginx-deploy
-
-![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/dc16f29b-2f71-4266-95d7-c15b24d33f26)
-
-     kubectl get pods -w 
-
-![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
 
 
 Q: Resource Quota Namespace?
@@ -656,6 +629,29 @@ Q: Resource Quota Namespace?
 
 * So get the event and try to troubleshoot the error, In this case we need to increase the namespace memory allocations.
 
+
+Q: ImagePullBackOff / ErrImagePull / Invalid Image Name Error?
+
+- Some scenerios can be there:
+1. Image is not present in a repository like Docker Hub.
+2. Image name is written wrong.
+3. Image is Private and you don't have access to the registry (Permission Denied).
+
+- Practical:-
+
+     kubectl create deployment nginx-deploy --image=nginx 
+     kubectl get pod -w
+     kubectl describe pod nginx-deploy..
+
+* Till above everything was fine, we have make error as image does not exit
+
+     kubectl edit deployment nginx-deploy
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/dc16f29b-2f71-4266-95d7-c15b24d33f26)
+
+     kubectl get pods -w 
+
+![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
 
 Q: Crash Loop Back Off error ?
 
@@ -706,13 +702,22 @@ Q: Crash Loop Back Off error ?
                 - name: scripts
                   emptyDir: {}
 
-vim test.sh
+		vim test.sh
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/1e1a3436-9342-4093-a03a-42ce47d28278)
 
-Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient permission, so the container trying again and again and going into Crash state.
+- Here in above scenerio user 1001 cannot write at /etc/ path due to insufficient permission, so the container trying again and again and going into Crash state.
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/20ce6dfa-8207-48a9-aec9-e20adf3b1f7e)
+
+Q: Difference between liveness and readiness probe?
+
+- Liveness is used to check if container or application running in the pod is alive or not.
+- Take example of a load balancer. LB is tied to a target group. TG has couple of virtual machines.
+- LB balance the request between virtual machines but LB also keep checking if the vm's are healthy or not. It only sends requests to vm which is healthy.
+- We need a mechanism to restart a crashed container. In kubernetes we have same kind of mechanism called liveness probe. 
+- 
+
 
 Q: Pods gone into Pending state
 
