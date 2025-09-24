@@ -386,6 +386,43 @@ Q: Explain the role of coreDNS in Kubernetes?
 - When pod tries to communicate with DNS name, this DNS name is resolved to an IP address like 10.96.1.5
 - This resolution in K8 is performed by Core DNS.  
 
+Q: If a node is tainted as 'NoSchedule'. Can you still schedule a pod on a node?
+
+- Taint is basically marking a node that no pod is schedule on that node, so in this case it is marked as "No schedule"
+- Reason, may the node is control plane or may be some maintainence activity is scheduled for that node.
+- This is possible when we go with tolerations.
+- Taints are applied to nodes to hold-off specific pods unless those pods have a matching toleration.
+- Tolerations are applied to pods, allowing them to bypass taints and run on tainted nodes.
+- Kubernetes supports three taint effects:
+
+1. NoSchedule → Pod will not scheduled on the node unless they have a matching toleration.
+2. PreferNoSchedule → System will try to avoid placing a pod on a node, but does not gaurantee it.
+3. NoExecute → Immediately evicts existing pods unless they have a matching toleration.
+
+- Imparitive command - taints (Node level):
+
+	kubectl describe node node01 | grep Taints*			# check if any taints exists on a node.
+	kubectl taint nodes node-name key=value:taint-effect
+	kubectl taint nodes node01 app=blue:NoSchedule
+	kubectl taint node node01 spray=mortein:NoSchedule
+
+- Tolerations:
+
+     	apiVersion: v1
+     	kind: Pod
+     	metadata:
+     	  name: bee
+     	spec:
+     	  containers:
+     	  - image: nginx
+     	    name: bee
+     	  tolerations:
+     	  - key: "spray"
+     	    value: "mortein"
+              operator: "Equal"
+     	    effect: NoSchedule
+     	    
+
 
 
 
