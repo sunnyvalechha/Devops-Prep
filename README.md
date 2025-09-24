@@ -319,8 +319,55 @@ Q: Can a Pod access service in different namespace. If yes, How?
 Q: Explain, how you can restrict access to db pod to only one app in the namespace?
 
 Scenerio:
-- There are 3 pods in a namespace and 1 
--  
+- There is a payment namespace
+- Also, there are 3 microservices (pods) in a namespace along with mysql DB which hold a critical information.
+- So, requirement is mysql DB should be accessible only from Pod A rest 2 pods should not be talk to mysql DB via any medium.
+- This can be possible through "Network Policies"
+- Using network policies we can block access to a pod or restrict it only from certain pods.
+
+Steps:
+
+* First, Label the DB pods as "app: db"
+* Then, application pod which wants to access the DB label it as "app: myapp"
+
+<img width="674" height="565" alt="image" src="https://github.com/user-attachments/assets/ca1101ee-e0d9-48cd-94bc-85a700020313" />
+
+* Create a network policy, which only allow access to DB which has a particular label as "app: myapp" and "app: db"
+
+<img width="924" height="750" alt="image" src="https://github.com/user-attachments/assets/4bec0a9f-4d6a-4b67-a7d8-0a1f5eb84f0e" />
+
+
+Q: Explain the Deployment strategy that you follow in your organinzation?
+
+- There are 2 popular deployment strategies:
+
+1. Canary
+2. Blue Green
+
+* We follow Canary deployment strategy in current organinzation.
+* We roll out 10% traffic to new version of the application.
+* Remaining 90% users still uses the old version.
+* We take feedback from the 10% of the users and run some test cases for load stimulation.
+* After couple of days we increase the laod to 20%, 50% and gradually 100%
+* Then we delete the old version of the application.
+* Traditionally we have ingress resource, service and Pod.
+* For new version of the app we need new ingress resource, service and Pod.
+* Adding annotations to the new ingress stating 10% of the traffic should go to this ingress.
+* Ingress controller configures the load balancer and tells the load balancer forward 90% of traffic to the old ingress and 10% to new.
+* Once all traffic is routed to new ingress we will delete the old ingress.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Q: How to Secure Kubernetes Cluster?
