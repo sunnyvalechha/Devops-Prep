@@ -242,7 +242,7 @@ A: A developer is new to K8 and he/she has hardcoded the Ip:
 Q: Types of Services in Kubernetes?
 - Various types of Services in K8 majorily 3 types but it also depends on the scope of access. 
 
-1. Cluster IP - Kubernetes service can only be access within the cluster. Any pod within the K8 cluster in any namespace can access the service using cluster IP or DNS name assocaite with the service. Scope of access is internal.
+1. Cluster IP - Kubernetes service can only be accessible within the cluster. Any pod within the K8 cluster in any namespace can access the service using cluster IP or DNS name assocaite with the service. Scope of access is internal.
 2. Node Port - Kubernetes exposes special type of port on the K8 node. Access the service with node IP : port number exposed for the service. Scope of access is anyone who has access to the cluster node can access to the service.
 3. Load balancer - Enables public access to the K8 services. However LB service type only works on K8 cluster that has Cloud controller manager (CCM) component running on it.
 4. ExternalName: This not create a service like above but it enables external access through DNS name.
