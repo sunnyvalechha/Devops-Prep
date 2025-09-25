@@ -714,9 +714,91 @@ Q: Difference between liveness and readiness probe?
 
 - Liveness is used to check if container or application running in the pod is alive or not.
 - Take example of a load balancer. LB is tied to a target group. TG has couple of virtual machines.
-- LB balance the request between virtual machines but LB also keep checking if the vm's are healthy or not. It only sends requests to vm which is healthy.
+- LB balance the request between virtual machines but LB also keeps checking if the vm's are healthy or not. It only sends requests to vm which is healthy.
 - We need a mechanism to restart a crashed container. In kubernetes we have same kind of mechanism called liveness probe. 
-- 
+- Readiness probe checks if the application or pod is ready to receive the traffic or not.
+- Explanation:
+
+  * Liveness and Readiness are 2 probes can be configured within the pod definition Liveness is configured to see if the pod is alive or not and Readiness is configured to see that same is ready to serve the traffic or not. Because there might be chances that pod is showing ready but not accepting traffic due to it failed.
+ 
+
+Q: Explain the difference between Ingress and LB service type?
+
+- Both, Ingress and load balancer service type is used to expose the application to the external world and to allow public access to the application.
+- When we go for LB service type, for every service that you need to expose, a unique load balancer is created that will increase the cost of the organization. Suppose you are 10 services means 10 load balancer will be created in Aws also we don't have a control on the load balancer it is up to CCM of kubernetes to decide which load balancer is created.
+- Ingress also exposes the application to the external world but it provides lot of configuration options, for multiple service we can use the same load balancer.
+- We can create target group in the load balancer using the ingress resource so that request is routed from the load balancer to multiple service backends.
+- This way ingress is quite effictive for the organization.
+- Along with that we can customize the ingress resource, we can choose the type of load balancer using ingress controller also we can choose the load balancer technique as well, like host based, path based, weight based laod balancing.
+- There are multiple ingress controller in the market like nginx, traffic, nvoy.
+
+Q: Your application working fine with ClusterIP with Ingress. How do you troubleshoot?
+
+- Here we have 2 things to understand.
+
+  1. Cluster IP working means communincation is done by cluster level only, may a different pod is trying to access the pod via service.
+  2. Ingress is not working means communication is tried from external world through some DNS endpoint.
+
+- Troubleshoot:
+
+1. Check if the Ingress controller is installed or not: Ingress controller is the one who watch the ingress resource and created the LB. Users actually makes the request to load balancer and from LB request is served to the NodePort.
+2. Check Ingress controller logs: We must find traces of the Ingress controller in the logs.
+3. Ingress class Name: When there are multiple ingress controller in the kubernetes cluster we need to define which ingress controller will watch which ingress controller. Ingress resources are setup with feild called "Ingress class name"
+4. If all the above is correct check for the YAML file for the ingress. May be you configured wrong service or port as backend in ingress.
+
+
+Q: Why do I need to setup Ingress controller after creating ingress?
+
+- Likewise, a deployment is created so a replica set controller is watching the deployment and create or delete the replicas.
+- Similarly we create Ingress with "kind: Ingress".
+- But, we have to installed our choice of Ingress controller who can watch this Ingress resource and configure load balancer for us.
+
+Q: We have an inhouse load balancer, Can we use ingress with our load balancers?
+
+- Likewise, If we create a Ingress resource it does not work if we don't install Ingress controller.
+- Similarly a company can use their in-house load balancer but they have to install the Ingress controller for the same.
+- Using Operators one can easily create their own kubernetes controllers and use their own load balancers.
+
+Q: Your deployment has 3 replicas but only 1 pod is running. What could be wrong?
+
+- Out of 3 replicas 1 replica is running so we will eliminate the common issue possibility like "image not found", "Imagepullsecret", "Crashloopbackoff".
+- Possible reason for the issue is "Lack of resources"
+- Suppose the failed pods are looking for 4 cpu but the available nodes have only 2-2 cpu's
+- Other possible reason is Nodes are tainted. So we have to apply tolerations to the nodes to schedule a pods
+- Check for pod configuration if there is any request for more cpu or taints have applied, then go for describe pod or check pod events for historical events.
+- Solution for this we have to add new node on the cluster.
+
+Q: Your pod mounts a ConfigMap, but changes to the configmap are not reflected?
+
+Q: Explain Node Affinity?
+
+- Node affinity is a way to influence the pods scheduling.
+- It tells kubernetes which nodes a pod prefers or requires to run on, based on labels assigned on the nodes.
+- Suppose, 3 nodes in the cluster, 2 is cpu based and 1 is GPU based.
+- Based on our workload we want our pods to schedule only on GPU node.
+- Node affinity comes in two main types:
+
+  1. required during scheduling: This is a preference rather than a strict requirement (Hard Affinity). The scheduler will try to place the pod on nodes that satisfy the conditions, but if no such nodes are available, the pod can still be scheduled on other nodes. You can assign a weight to preferred rules, allowing you to prioritize certain preferences over others. Similar to hard affinity, ignoredDuringExecution means label changes after scheduling do not impact running pods.The pod will only be scheduled on nodes that satisfy all the specified label matching conditions. If no matching node is found, the pod will remain in a Pending state until a suitable node becomes available. IgnoredDuringExecution means that if a node's labels change after the pod has been scheduled, the running pod is not affected. It will not be evicted or rescheduled.
+
+  2. preferredDuringScheduling: This is a preference rather than a strict requirement. The scheduler will try to place the pod on nodes that satisfy the conditions, but if no such nodes are available, the pod can still be scheduled on other nodes. You can assign a weight to preferred rules, allowing you to prioritize certain preferences over others. Similar to hard affinity, ignoredDuringExecution means label changes after scheduling do not impact running pods.
+
+
+Q: Difference between NodeAffinity and Node label selector?
+
+- Node Affinity is a modern version of Nodelabelselector. Node affinity comes with Hard and Soft Affinity.
+- Hard Affinity: I can tell kubernetes to only schedule my pod at this particular pod only.
+- Soft Affinity: I can tell kubernetes I am preffering to schedule my pod at this particular pod only. Otherwise I am fine if pod is schedule on some other node.
+
+Q: What is container runtime in Kubernetes?
+
+- It is a component of Kubernetes worker node and it is present on all the worker nodes.
+- When API server calls at the time we run "kubectl" command. API checks for authenticaiton & authorization.
+- Scheduler identifies right node to place the pod. Once done, scheduler talks to kubelet to place the pod.
+- Then, kubelet calls the "Container Runtime". It not only runs the container but follows the series of steps:
+
+1. CR pulls the image that is provided in the pod specification, it looks for the container registry like Dockerhub.
+2. Once the image is pulled it create the linux namespace for the container. It defines the Cgroups & all the kernel premitive to run the container.
+3. Finally, it runs the container within the pod.
 
 
 Q: Pods gone into Pending state
@@ -727,35 +809,26 @@ Q: Pods gone into Pending state
 
   ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/bccc7440-475d-40a3-8a55-a07b410531b9)
 
-  Two other tains are scheduled, run below command this will un-taint the node
+* Two other tains are scheduled, run below command this will un-taint the node
 
-  kubectl taint node kube-node2 cka=test:NoSchedule-
+		kubectl taint node kube-node2 cka=test:NoSchedule-
 
   
-
-**OOM Killed - Out of Memory 
-
-OOM Killed - Limit Overcommit 
-
-OOM Killed - Container Limit Reached**
-
+Q: OOM Killed - Out of Memory | Limit Overcommit | Container Limit Reached
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/9b6756e5-26ee-4dd4-bc34-0d0a9dfd442c)
 
+Q: The connection to the server localhost:8080 was refused - did you specify the right host or port?
 
+		cat /etc/kubernetes/manifest/kube-apiserver.yaml
+		--advertise-address=<IP ADDRESS>
+  		--secure-port=<PORT NO.>
 
-**The connection to the server localhost:8080 was refused - did you specify the right host or port?**
+Q: How to change config, if there is any mismatch?
 
-cat /etc/kubernetes/manifest/kube-apiserver.yaml
+* Home directory of user have hidden directory called **.kube** change the following here
 
-- --advertise-address=<IP ADDRESS>
-- --secure-port=<PORT NO.>
-
-**How to change config, if there is any mismatch**
-
-**Home directory of user have hidden directory called **.kube** change the following here**
-
-cat .kube/config
+		cat .kube/config
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/7b4adbc8-e656-4232-b7f8-938fc85346cb)
 
@@ -780,9 +853,21 @@ mv /tmp/kube-apiserver.yaml .
 
 =========================================================================================================================
 
-**Secured sensitive information on Kubernetes cluster**
+Q: Secured sensitive information on Kubernetes cluster?
 
 * Kyverno, RBAC, Secure your API server, Cluster network policies are very well defined, Information (Data) are encrypted at REST in ETCD, Use Secure container Images, Cluster Monitoring, Frequent Upgrades.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Jenkins & CICD Pipeline
