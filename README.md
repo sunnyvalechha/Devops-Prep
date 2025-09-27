@@ -88,6 +88,12 @@ The reflog is a local log of all changes made to the repository, including delet
 
 
 # AWS
+
+1. Explain how will you design a highly available and scalable multi-tier application.
+
+- 
+
+
 1. difference in aws auto scaling vs ec2 auto scaling
 2. difference in launch template vs launch configuration
 3. who is publisher and who is consumer (sqs)
