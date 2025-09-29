@@ -107,7 +107,21 @@ The reflog is a local log of all changes made to the repository, including delet
 - Stateless: We have define a rule weather allow or deny for both ingress or egress,
 - Statefull: We only have to define a rule for ingress, for egress all the traffic is allow by default.
 
+5. Ec2 instance is crashed unexpectedly, How will you troubleshoot?
+- In Aws we have service cloud "Cloud Trail". With the help of cloudtrail we can find out what can be the potential issue.
+- Specifically Ec2 is terminated we will look for an API call called "Terminate Instances" in Cloud Trail.
+- Another thing we can look for, if the Ec2 instance is a spot instance, spot instance is used to save money in many org.
+- Another thing we can look for if the instance is terminated through auto scaling group.
+- All of these thing can be looked in Cloud Trail.
 
+6. Lambda function faild randomly, with no error logs. How will you fix?
+- Lambda function usually performs a HTTP request or interact with other Aws services like S3 or RDS.
+- We will definetely find an error in logs we have to look for it.
+- To understand the complete journey of the request we will enable tracing for this function and this can be enabled Aws X-ray service.
+- Then through Aws x-ray service we'll try to understand if there is any call latency with any service like S3 or Rds.
+- As an immediate fix, we can increase the number of retries so it will try once or twice to run or just run the request in loop within the lambda function.
+- We can increase the timeout of lambda function, if it is genuinely failing with timeout.
+- Still if its failing after increase the timeout we will re-create the lamba may choose some other programming language.
 
 
 
