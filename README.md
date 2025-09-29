@@ -145,6 +145,15 @@ The reflog is a local log of all changes made to the repository, including delet
 - Also we will try to use a IAC approach like modify the infra with the terraform and integrated with version control system like Git for proper audting and versioning.
 
 
+9. Explain a cost optimization activity that you perform in the current or last org?
+- Cost optimization is part of my day-to-day roles.
+- I was working on the task where I was identifying the un-used EBS volumes and delete those un-used EBS volumes.
+- 
+
+
+
+
+
 
 
 
