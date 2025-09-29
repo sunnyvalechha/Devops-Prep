@@ -148,7 +148,11 @@ The reflog is a local log of all changes made to the repository, including delet
 9. Explain a cost optimization activity that you perform in the current or last org?
 - Cost optimization is part of my day-to-day roles.
 - I was working on the task where I was identifying the un-used EBS volumes and delete those un-used EBS volumes.
-- 
+- Before I used to work on aws cli to run "aws describe volumes" to identify the list of volumes but I realized the Lambda function is the better approach where I used python as a scripting language.
+- I try to look for un-used volumes by using the boto3 module and delete the same by using boto3 itself.
+- I run the function periodically so I don't need to remember that I need to run the lambda function. This will be executed every 4th Friday of the month.
+
+10. Exp
 
 
 
