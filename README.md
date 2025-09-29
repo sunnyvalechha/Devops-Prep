@@ -123,6 +123,31 @@ The reflog is a local log of all changes made to the repository, including delet
 - We can increase the timeout of lambda function, if it is genuinely failing with timeout.
 - Still if its failing after increase the timeout we will re-create the lamba may choose some other programming language.
 
+7. What will you do when Aws RDS storage is full?
+- List of steps to take to solve the problem in long term:
+- We assume that users are already blocked and unable to login due to storage is full.
+- Go to RDS and try to take snapshot just to be secure.
+- We will create a larger storage this time, bit larger than the previous one
+- We will try to enable auto-scaling. This will temporary un-block the users.
+- As a long term solution: We will go to RDS and look for database being used, tables and objects that is consuming large storage in the Rds storage.
+- We will run a sql query, in case we are using any other db we'll use that language to identify which database is consuming large storage.
+- We will share this information to the developers or other stake holders and check if we can drop the table or remove the database or ask them to housekeep the specific db or remove the duplicate db or table.
+- For future we will head to the cloud watch and create a metric to monitor the Rds storage called as "free storage space". This will inform us when Rds storage is about to full.
+
+8. A developer deleted critical resources like S3, Rds, Ec2. What you will do?
+- Two things to need to address here: Instant solution and Long term solution.
+- Because the critical resource is deleted. I will try to re-create the resource.
+- Fortunately these resources have a backup mechanism like S3 have versioning, Ec2 have snapshots or Ami's, Rds have "Point In time recovery" (PITR). We will try to restore the backup first.
+- Afcourse, some data will be loss while re-creating the resource from previous version still I will go ahead and create.
+- All the above is a instant solution.
+- Long term solution for this is to create a strong IAM policies or RBAC rules.
+- I will follow a zero privilege approach or only right people have access to the resources.
+- Also we will try to use a IAC approach like modify the infra with the terraform and integrated with version control system like Git for proper audting and versioning.
+
+
+
+
+
 
 
 1. difference in aws auto scaling vs ec2 auto scaling
