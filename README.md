@@ -152,7 +152,8 @@ The reflog is a local log of all changes made to the repository, including delet
 - I try to look for un-used volumes by using the boto3 module and delete the same by using boto3 itself.
 - I run the function periodically so I don't need to remember that I need to run the lambda function. This will be executed every 4th Friday of the month.
 
-10. Exp
+10. Explain recent challenge that you faced that you faced with Aws and how did you solve it?
+- In recent time I faced the major challenge with Aws code commit as Aws annonce the 
 
 
 
