@@ -91,7 +91,24 @@ The reflog is a local log of all changes made to the repository, including delet
 
 1. Explain how will you design a highly available and scalable multi-tier application.
 
-- 
+2. What is Nat and when it is used?
+- Nat in Aws is used to allow private subnet resources to initiate internet connection while still being protected from the incomming traffic.
+
+3. Can applications in different subnets of Vpc interact by default, if no, Why?
+- When we create a Vpc, aws create a default route also called as main route, this route has a target as a local, means different subnet (applications) within the vpc should interact with each other.
+- By default it is enabled for internal communication and external communication is disabled for that Nat is used.
+- To block any request NACL is used but by default is not blocked by Aws.
+
+4. NACL vs Security group, which one do you use in your organization?
+- When we create a VPC in Aws a route rule of VPC will allow communication between subnets of Aws because the default route rule of Aws.
+- By default when we configure an NACL all the traffic is denied, if we want to allow some port or IP we have to specify. NACL works on the subnet level.
+- Security groups works on the Instance level if we want to allow any traffic from port or IP, if we don't allow any traffic by default it is denied.
+- NACL is stateless, Security group is statefull
+- Stateless: We have define a rule weather allow or deny for both ingress or egress,
+- Statefull: We only have to define a rule for ingress, for egress all the traffic is allow by default.
+
+
+
 
 
 1. difference in aws auto scaling vs ec2 auto scaling
