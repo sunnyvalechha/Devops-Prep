@@ -41,7 +41,7 @@ The reflog is a local log of all changes made to the repository, including delet
    git reflog
   
 
-===================================================================================================================================
+===========================================================================================
 # AWS
 
 1. Explain how will you design a highly available and scalable multi-tier application.
