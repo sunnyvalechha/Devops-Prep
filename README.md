@@ -1,13 +1,14 @@
 # Terraform
 
-1. Migration resource to Terraform. How?
+* Migration resource to Terraform. How?
    
-
+===========================================================================================
 # Monitoring with Grafana / Prometheus / Thanos
 
-What are challenges with Prometheus? 
-Ans: 
+* What are challenges with Prometheus?
 
+
+===========================================================================================
 # Git
 
 Git Fetch and Git Merge?
@@ -134,7 +135,7 @@ The reflog is a local log of all changes made to the repository, including delet
 * aws lambda - use case
 * lambda edge
 * vertical scaling in lambda
-
+===========================================================================================
 # Ansible
 1. Pull and push mechanism
 2. day to day task in ansible
@@ -148,7 +149,7 @@ The reflog is a local log of all changes made to the repository, including delet
 10. maintaining plugins in ansible
 11. type of ansible inventory and dynamic inventory (static / dynamic)
 12. idempotency
-
+===========================================================================================
 # Docker
 
 Q: What is side car container and when to use one?
@@ -201,7 +202,7 @@ Note: For the basic calculator app we don't require so heavy image
 
 
 
-
+===========================================================================================
 # Kubernetes
 
 - What is the Port range of Service Node-Port?           # 30,000 to 32,767
@@ -874,14 +875,14 @@ again move back to home location
 
 mv /tmp/kube-apiserver.yaml .
 
-=========================================================================================================================
+
 
 Q: Secured sensitive information on Kubernetes cluster?
 
 * Kyverno, RBAC, Secure your API server, Cluster network policies are very well defined, Information (Data) are encrypted at REST in ETCD, Use Secure container Images, Cluster Monitoring, Frequent Upgrades.
 
 
-
+===========================================================================================
 # Jenkins & CICD Pipeline
 
 - What type of Jenkins file are you following & Which agent you are using in Jenkins file?
@@ -948,7 +949,7 @@ These days every organization follows the Agile methodology.
 
 **Promote application from Dev env to Production env**
 
-
+===========================================================================================
 # D2D Tasks:
 
 1. Observability and Monitoring: Start the day from going through the email if we have an email related to any critical alerts so we start work upon it and if there is any warning alert on the cluster to we check the warnings.
