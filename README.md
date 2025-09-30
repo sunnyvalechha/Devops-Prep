@@ -1,52 +1,7 @@
-1. What is DevOps?
-Ans: It is a culture that improves application delivery by ensuring proper automation, quality checks, monitoring or observability, and testing.
-3. Why is DevOps important?
-4. Introduce yourself.
-Ans: I am working as a DevOps engineer. I have an overall experience of 6 years. I started my career as a System Administrator and Platform engineer, specifically in DevOps, where I have more than 3 years of experience.
-6. What are your day-to-day activities?
-Ans: In the current organization I take care of the automation part using Ansible.
-     I ensure that quality should be maintained for the application.
-     I ensure there should be continuous monitoring.
-     I have automated the Testing process in the DevOps lifecycle.
-
 # Terraform
 
 1. Migration resource to Terraform. How?
    
-# Software Development Lifecycle
-
-There are 3 major phases of SDLC Design, Development, and Test
-
-Example: 
-1. There is an E-commerce website called Flipkart or Amazon and the website has the requirement to add a kids section on their website.
-2. 1st is requirement.
-3. 2nd phase will be planning.
-4. 3rd phase is defining.
-5. 4th phase is designing
-6. Building
-7. Testing
-8. Deploy
-
-![image](https://github.com/user-attachments/assets/b3cc149e-5963-4d4e-91c0-df7b8b727433)
-
-These days every organization follows the Agile methodology.
-
-* Agile methodology: In Agile we follow all the above steps but we do not wait till all the planning is done, hence we will take short sprints like don't wait till all the design documents are done, if the small chunk is done we start the process then again there is the progress we again build.
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
 
 # Monitoring with Grafana / Prometheus / Thanos
 
@@ -86,7 +41,7 @@ The reflog is a local log of all changes made to the repository, including delet
    git reflog
   
 
-
+===================================================================================================================================
 # AWS
 
 1. Explain how will you design a highly available and scalable multi-tier application.
@@ -162,31 +117,23 @@ The reflog is a local log of all changes made to the repository, including delet
 
 
 
-
-
-1. difference in aws auto scaling vs ec2 auto scaling
-2. difference in launch template vs launch configuration
-3. who is publisher and who is consumer (sqs)
-4. cloudfront - uses and need
-   Cloud Front is a caching service or a content delivery network where response of the request are cached at a location to reduce the latency.
-
-* Regional Egde cache in Cloud Front.
-A regional edge cache in Amazon CloudFront is a location that's deployed globally, close to viewers. They're located between the origin server and the global edge locations (PoPs). 
-
-* Geo Targeting in Cloud Front?
-  Geo-targeting in Amazon CloudFront is a feature that allows businesses to show personalized content to their audience based on their geographic location.
-
-  
-   
-6. when to choose s3 and when to cloudfront
-7. Iam roles vs policy
-8. aws lambda - use case
-9. lambda edge
-10. vertical scaling in lambda
-
-
-
-
+* Aws Landing Zone ?
+* Which Aws instance (flavour) and how many is used to support Cloudera cluster ?
+* How many pods we can create in __ type of instance and __ size if we have these much of nodes ?
+* How much pods EKS supports per worker node ?
+* Cloudwatch, SNS, SES
+* difference in aws auto scaling vs ec2 auto scaling
+* difference in launch template vs launch configuration
+* who is publisher and who is consumer (sqs)
+* cloudfront - uses and need
+* Cloud Front is a caching service or a content delivery network where response of the request are cached at a location to reduce the latency.
+* Regional Egde cache in Cloud Front - A regional edge cache in Amazon CloudFront is a location that's deployed globally, close to viewers. They're located between the origin server and the global edge locations (PoPs).
+* Geo Targeting in Cloud Front? - Geo-targeting in Amazon CloudFront is a feature that allows businesses to show personalized content to their audience based on their geographic location.
+* when to choose s3 and when to cloudfront
+* Iam roles vs policy
+* aws lambda - use case
+* lambda edge
+* vertical scaling in lambda
 
 # Ansible
 1. Pull and push mechanism
@@ -935,17 +882,6 @@ Q: Secured sensitive information on Kubernetes cluster?
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 # Jenkins & CICD Pipeline
 
 - What type of Jenkins file are you following & Which agent you are using in Jenkins file?
@@ -989,6 +925,27 @@ In an organization 3 branch will be there at any point.
 Hotfix Branch: Suppose there might a critical bug in the latest release of an application version. So from that specific version which has a bug, we will create a Hotfix branch, we will fix the code in Hotfix branch
 and then we will merge the changes from Feature, Main and Release Branch.
 
+# Software Development Life cycle (SDLC)
+
+* There are 3 major phases of SDLC -  Design, Development, and Test
+
+Example: 
+1. There is an E-commerce website called Flipkart or Amazon and the website has the requirement to add a kids section on their website.
+2. So 1st phase is gather requirement.
+3. 2nd phase will be planning.
+4. 3rd phase is defining.
+5. 4th phase is designing
+6. Building
+7. Testing
+8. Deploy
+
+![image](https://github.com/user-attachments/assets/b3cc149e-5963-4d4e-91c0-df7b8b727433)
+
+These days every organization follows the Agile methodology.
+
+* Agile methodology: In Agile we follow all the above steps but we do not wait till all the planning is done, hence we will take short sprints like don't wait till all the design documents are done, if the small chunk is done we start the process then again there is the progress we again build.
+
+
 **Promote application from Dev env to Production env**
 
 
@@ -999,14 +956,6 @@ and then we will merge the changes from Feature, Main and Release Branch.
 3. Billing Review: We generate the monthly billing report and share with the higher management to review of monthly Aws Cloud enviroment.
 4. Security Issues: D2D work upon the Aws cloud landing zone where we identify and mitigate if there is any security breach in our cluster example any security group have created for the application which having unnecessary ports open so we give a check on that using services like Security Hub and AWS Trusted Advisor.
 5. Monitoring: We have setup Cloudwatch dashboard for our different application we provide that dashboard to application team we also have configured alarms and alerts as well using SES and SNS
-
-
-
-Aws Landing Zone ?
-* Which Aws instance (flavour) and how many is used to support Cloudera cluster ?
-* How many pods we can create in __ type of instance and __ size if we have these much of nodes ?
-* How much pods EKS supports per worker node ?
-* Cloudwatch, SNS, SES 
 
 
 
