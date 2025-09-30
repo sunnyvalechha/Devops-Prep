@@ -3,7 +3,7 @@
 * Migration resource to Terraform. How?
    
 ===========================================================================================
-# Monitoring with Grafana / Prometheus / Thanos
+# Monitoring with Grafana and Prometheus
 
 * What are challenges with Prometheus?
 
@@ -48,15 +48,15 @@ The reflog is a local log of all changes made to the repository, including delet
 1. Explain how will you design a highly available and scalable multi-tier application.
 
 2. What is Nat and when it is used?
-- Nat in Aws is used to allow private subnet resources to initiate internet connection while still being protected from the incomming traffic.
+- Nat in Aws is used to allow resources in private subnet to initiate internet connection while still being protected from the incomming traffic.
 
 3. Can applications in different subnets of Vpc interact by default, if no, Why?
-- When we create a Vpc, aws create a default route also called as main route, this route has a target as a local, means different subnet (applications) within the vpc should interact with each other.
+- When we create a Vpc, aws create a default route also called as main route, this route has a target as a local, means applications of different subnet within the vpc should interact with each other.
 - By default it is enabled for internal communication and external communication is disabled for that Nat is used.
 - To block any request NACL is used but by default is not blocked by Aws.
 
 4. NACL vs Security group, which one do you use in your organization?
-- When we create a VPC in Aws a route rule of VPC will allow communication between subnets of Aws because the default route rule of Aws.
+- When we create a VPC in Aws a route rule of VPC will allow communication between subnets of Aws because the default route rule.
 - By default when we configure an NACL all the traffic is denied, if we want to allow some port or IP we have to specify. NACL works on the subnet level.
 - Security groups works on the Instance level if we want to allow any traffic from port or IP, if we don't allow any traffic by default it is denied.
 - NACL is stateless, Security group is statefull
@@ -71,18 +71,18 @@ The reflog is a local log of all changes made to the repository, including delet
 - All of these thing can be looked in Cloud Trail.
 
 6. Lambda function faild randomly, with no error logs. How will you fix?
-- Lambda function usually performs a HTTP request or interact with other Aws services like S3 or RDS.
-- We will definetely find an error in logs we have to look for it.
-- To understand the complete journey of the request we will enable tracing for this function and this can be enabled Aws X-ray service.
-- Then through Aws x-ray service we'll try to understand if there is any call latency with any service like S3 or Rds.
+- Lambda function usually performs a HTTP request to interact with other Aws services like S3 or RDS.
+- We will definetely find an error in logs but we have to look for it.
+- To understand the complete journey of the request we will enable tracing for this function and this can be enabled by Aws X-ray service.
+- Then through x-ray service we'll try to understand if there is any call latency with any service like S3 or Rds.
 - As an immediate fix, we can increase the number of retries so it will try once or twice to run or just run the request in loop within the lambda function.
 - We can increase the timeout of lambda function, if it is genuinely failing with timeout.
-- Still if its failing after increase the timeout we will re-create the lamba may choose some other programming language.
+- Still if its failing after increase the timeout we will re-create the lamba or may be choose some other programming language.
 
 7. What will you do when Aws RDS storage is full?
 - List of steps to take to solve the problem in long term:
 - We assume that users are already blocked and unable to login due to storage is full.
-- Go to RDS and try to take snapshot just to be secure.
+- We will go to RDS and try to take snapshot just to be secure.
 - We will create a larger storage this time, bit larger than the previous one
 - We will try to enable auto-scaling. This will temporary un-block the users.
 - As a long term solution: We will go to RDS and look for database being used, tables and objects that is consuming large storage in the Rds storage.
@@ -126,8 +126,7 @@ The reflog is a local log of all changes made to the repository, including delet
 * difference in aws auto scaling vs ec2 auto scaling
 * difference in launch template vs launch configuration
 * who is publisher and who is consumer (sqs)
-* cloudfront - uses and need
-* Cloud Front is a caching service or a content delivery network where response of the request are cached at a location to reduce the latency.
+* cloudfront - uses and need - Cloud Front is a caching service or a content delivery network where response of the request are cached at a location to reduce the latency.
 * Regional Egde cache in Cloud Front - A regional edge cache in Amazon CloudFront is a location that's deployed globally, close to viewers. They're located between the origin server and the global edge locations (PoPs).
 * Geo Targeting in Cloud Front? - Geo-targeting in Amazon CloudFront is a feature that allows businesses to show personalized content to their audience based on their geographic location.
 * when to choose s3 and when to cloudfront
