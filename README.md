@@ -1,7 +1,43 @@
 # Terraform
 
-* Migration resource to Terraform. How?
-   
+Q: Difference between for_each and for_in in Terraform?
+
+- For_each: is used when you want to create multiple instance of a resource. Suppose you want to create three S3 buckets so instead of writing the resource block 3 times, you can simply use "for_each" inside that resource block.
+
+<img width="829" height="197" alt="image" src="https://github.com/user-attachments/assets/122c76f0-7826-454e-8154-23f2e951a794" />
+
+- For_in: It is exactly same as loop in python or shell script. It will loop over variables, same in terraform as well.
+
+<img width="959" height="175" alt="image" src="https://github.com/user-attachments/assets/91482b34-a1cc-4cb0-b4ba-99f459e9f9b8" />
+
+Q: How do Terraform modules work and why should we use them?
+
+- Modules are re-usable groups in terraform. They are just like functions in python.
+- In a current org I work with multiple development teams and all of them need VPC resource on Aws.
+- Instead of writing hundred lines of VPC creation every time, I will just define a module for VPC, when the next requirement comes I just invoke the module in my terraform file by just passing the parameters.
+- Suppose with vpc creation we got a requirement of 10 subnet, security groups, ec2 instances and some s3 buckets image the lines we have to write instead of that we can create a module and just change the value of variables.
+- We can share the document with the development teams and they even can easily update values they want to change and use the module.
+- Advantages: Re-usability, maintenence become easy.
+
+Q: What is state file in Terraform?
+
+- State file is the brain of the terraform.
+- Whenever terraform creates a resource on a cloud provider like Aws, terraform store this information on to the state file to understand what resource it has to be created.
+- Simple, every time we create a resource in terraform it store the information in state file as.
+
+  1. Resource ID
+  2. Metadata
+  3. Ip address
+  4. Last known state
+
+- When we try to update anything it compare with the last state and the current things we are asking to update.
+- If state file is not present or deleted or moved then similar resource will created multiple times.
+
+
+
+
+
+
 ===========================================================================================
 # Monitoring with Grafana and Prometheus
 
