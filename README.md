@@ -46,7 +46,21 @@ Q: Have you considered storing statefile in Git instead of Aws S3 or Azure Blob?
 - We can block access with strict policies.
 - We can enable backups and lockings of the state file as multiple people cannot run the terraform at same time.
 
-Q: 
+Q: How do you manage state file in Terraform?
+
+- Statefile is the brain of the terraform. Statefile has a information of the resources that we created in Terraform.
+- We have to keep state file at the centralized location where other engineers can also access it like remote backend (Aws S3).
+
+
+Q: Two devops engineers executed terraform apply at once.
+
+- In terraform there is a concept called 'state locking' and we store the state file in remote backend S3 and S3 also implement locking of the state file.
+- If both the engineers have run 'terraform apply' at same time considering some latency in the network, S3 provide the lock whose request reach 1st to the remote backend.
+- If other engineer is requested for the same modification, he/she might see the resource already exist.
+
+Q: We don't have a cloud account where do we store the state file?
+
+- 
 
 
 ===========================================================================================
