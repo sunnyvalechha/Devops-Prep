@@ -60,6 +60,16 @@ Q: Two devops engineers executed terraform apply at once.
 
 Q: We don't have a cloud account where do we store the state file?
 
+- Remote backend concept of terraform is not restricted to the cloud providers.
+- Terraform also supports stand alone backend concepts like Hashicorp consul.
+- We can install hashicorp consul and integrate with hashicorp vault.
+- Otherwise, if you are ok with the Terraform enterprise version with licensing cost then you can get state file locking feature along with other features like drift detection.
+
+Q: Write terraform code to create any terraform resource on Aws.
+
+Q: Difference between resource and data-source in Terraform?
+
+- Terraform can not only create, delete, modify information on the cloud provider but it also can read information from the cloud provider using "data-source"
 - 
 
 
