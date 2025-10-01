@@ -33,9 +33,20 @@ Q: What is state file in Terraform?
 - When we try to update anything it compare with the last state and the current things we are asking to update.
 - If state file is not present or deleted or moved then similar resource will created multiple times.
 
+Q: Have you considered storing statefile in Git instead of Aws S3 or Azure Blob?
 
+- In terraform, state file holds the critical information like resource id, last known state, metadata, Ipaddress, dependencies.
+- This cannot stored on the local system of any devops engineer.
+- Also, this cannot stored on git repository.
+- If git repo is public people can have access to the state file easily, even it is private withing the organization, still some people can have access.
+- To avoid this, remote file is stored in remote backend like Aws S3 or Azure Blob or GCS.
+- Define a backend.tf within the HCL file in the backend.tf file we will define the remote backend.
+- We can have versioning enable for the backend.
+- We can increase the security of state file through access level in S3.
+- We can block access with strict policies.
+- We can enable backups and lockings of the state file as multiple people cannot run the terraform at same time.
 
-
+Q: 
 
 
 ===========================================================================================
