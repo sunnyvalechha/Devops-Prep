@@ -80,6 +80,8 @@ Q: Difference between resource and data-source in Terraform?
 <img width="1477" height="258" alt="image" src="https://github.com/user-attachments/assets/8472f192-2bfd-47fb-b5e8-bf23c0cfaf4e" />
 
 - This information we can get through terraform documentaion: Aws Provider -> Data sources
+
+
 ===========================================================================================
 # Monitoring with Grafana and Prometheus
 
