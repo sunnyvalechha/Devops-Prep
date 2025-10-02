@@ -70,9 +70,16 @@ Q: Write terraform code to create any terraform resource on Aws.
 Q: Difference between resource and data-source in Terraform?
 
 - Terraform can not only create, delete, modify information on the cloud provider but it also can read information from the cloud provider using "data-source"
-- 
+- For that, first, we have define a data block
 
 
+<img width="661" height="185" alt="image" src="https://github.com/user-attachments/assets/617c53bd-c0ee-49e3-a52c-e7db209f6e74" />
+
+- Then define what you want terraform to read example subnet_id below, here we are fetching infomation of "default_route_table_id"
+
+<img width="1477" height="258" alt="image" src="https://github.com/user-attachments/assets/8472f192-2bfd-47fb-b5e8-bf23c0cfaf4e" />
+
+- This information we can get through terraform documentaion: Aws Provider -> Data sources
 ===========================================================================================
 # Monitoring with Grafana and Prometheus
 
