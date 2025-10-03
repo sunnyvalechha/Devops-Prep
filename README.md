@@ -229,7 +229,18 @@ The reflog is a local log of all changes made to the repository, including delet
 11. type of ansible inventory and dynamic inventory (static / dynamic)
 12. idempotency
 ===========================================================================================
+
 # Docker
+
+Q: You have just build docker image and run it using docker run, but the container exist immediately after starting. What might be the reason? How would you troubleshoot and fix the issue?
+
+- Docker containers are meant to be a single process containers. If the command or process specified in the containers completes quickly or may be it fails immediately or if its not a long running process. Then the container might exit right after the container started.
+- For example, we run a command in the container called "echo, Hello World" so echo is a linux command which run and complete in a second and the life of the process is very short.
+- Right after executing the command the container exits.
+- 
+- 
+
+
 
 Q: What is side car container and when to use one?
 
