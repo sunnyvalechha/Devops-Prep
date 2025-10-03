@@ -258,10 +258,22 @@ Q: Port is not accessible even after Port mapping in Docker | You're running a D
 - I will try to understand on which language the app is written, suppose python, so there might be a chances where developer mentioned "app.listen.(80,127.0.0.1)"
 - Above, port is mapped with localhost means if we run "curl localhost:8080" it will work but outside the cluster it will not work.
 - Simply, ask the developer to mapped the port with "app.listen.(80,0.0.0.0/0)
-- Further check 'docker log', 'docker inspect'
+- Further check 'docker log', 'docker inspect', 'netstat', 'lsof'
 
 
+Q: Data lost when container stops and restarts, How will you fix it?
 
+- By default, containers are ephimeral in nature and anything stored inside the container will be lost when container is dead.
+- Suppose MYSQL application inside the container is writing files, so data will be lost by default if the container is restarted.
+- We can use the concept of "docker volumes" to preserve the data in containers.
+
+		docker volume create <volume name>
+		docker volume create mydata
+		docker run -v mydata:/app/data nginx	# nginx is the name of the container
+
+- Next time, when container is dead and restarted. It will take the data from mydata volume
+ 
+Q: 
 
 
 Q: What is side car container and when to use one?
