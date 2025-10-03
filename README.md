@@ -249,6 +249,18 @@ Q: What is the purpose of EXPOSE keyword in Dockerfile?
 - EXPOSE comes handy only with docker compose, in docker compose we use expose with port number (EXPOSE 8080) so docker compose will understand that we want to expose the port.
 
 
+Q: Port is not accessible even after Port mapping in Docker | You're running a Docker container, but when you try to access the application via localhost: <port>, nothing loads to timeout?
+
+- First, In the question itself mentioned that port mapping is done so this is not the possibility of error.
+- Re-check, if at the time of 'docker run' right port is used, there might a issue with port forwarding.
+- I will check if the port is free or not used with any other service.
+- I will check if there is any firewall settings configured, like port is blocked by the firewall.
+- I will try to understand on which language the app is written, suppose python, so there might be a chances where developer mentioned "app.listen.(80,127.0.0.1)"
+- Above, port is mapped with localhost means if we run "curl localhost:8080" it will work but outside the cluster it will not work.
+- Simply, ask the developer to mapped the port with "app.listen.(80,0.0.0.0/0)
+- Further check 'docker log', 'docker inspect'
+
+
 
 
 
