@@ -237,8 +237,18 @@ Q: You have just build docker image and run it using docker run, but the contain
 - Docker containers are meant to be a single process containers. If the command or process specified in the containers completes quickly or may be it fails immediately or if its not a long running process. Then the container might exit right after the container started.
 - For example, we run a command in the container called "echo, Hello World" so echo is a linux command which run and complete in a second and the life of the process is very short.
 - Right after executing the command the container exits.
-- 
-- 
+- Check docker log when container fails
+
+Q: What is the purpose of EXPOSE keyword in Dockerfile? 
+
+- Practical use case of "EXPOSE" keyword is just for documentation purpose. Dockerfile allows documentation of the port using expose instruction.
+- Example, you are working on a docker file and year later you want to handover this docker file to other devops engineer.
+- Expose keyword will help other devops engineer to understand that your application is running on port 80.
+- Otherwise they have to check the source code and findout on which port the app is running which is not an easy task.
+- In reality, to expose any port we use '-p' parameter.
+- EXPOSE comes handy only with docker compose, in docker compose we use expose with port number (EXPOSE 8080) so docker compose will understand that we want to expose the port.
+
+
 
 
 
