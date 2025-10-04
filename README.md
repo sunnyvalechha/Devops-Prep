@@ -273,7 +273,23 @@ Q: Data lost when container stops and restarts, How will you fix it?
 
 - Next time, when container is dead and restarted. It will take the data from mydata volume
  
+Q: You made the change in the code, re-build the image but the change isn't reflected?
+
+- Suppose, there's some payment application which is running fine, a developer made a change in version 1.
+- After making the change in the code, developer saved the code and ran the command I gave "docker build -t V2 <docker file location>"
+- V2 image is created, developer shared the image to QE team, QE team says that application is working same like V1 and no change happend.
+- Now this situation comes to us as an devops engineer, now handle the situation.
+- Answer: This happens due to caching. Instructions within the dockerfile is layered and cache is maintained by docker.
+- In some cases, Docker might not recognize the change at a particular instruction level in the Docker, because of that it will not re-build that particular part, but it will just take the layer.
+- This situation happens very rarely but when it happens but when this happens we just need to run below command.
+
+		docker build --no-cache -t <image-name> <location of Docker file>
+
+- This happens because docker uses caching to build the image, suppose we build same image multiple times, 1st time it will take 10 minutes, 2nd time it will take 5 minutes because it cache the layers.
+
 Q: 
+
+
 
 
 Q: What is side car container and when to use one?
