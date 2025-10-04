@@ -287,7 +287,24 @@ Q: You made the change in the code, re-build the image but the change isn't refl
 
 - This happens because docker uses caching to build the image, suppose we build same image multiple times, 1st time it will take 10 minutes, 2nd time it will take 5 minutes because it cache the layers.
 
-Q: 
+Q: Appication works locally but inside the container it fails and crashes with "Permission Denied". What could be wrong?
+
+- When we run "docker build" this command is ran by some user, we cannot run this by user root, this is a bad practise.
+- Within the docker file we use users like 'ubuntu' or 'sunny', these users have elevated privileges (higher-than-normal administrative rights and permissions).
+
+<img width="872" height="733" alt="image" src="https://github.com/user-attachments/assets/91018633-e4c9-4fcf-bacb-e3da1899d22b" />
+
+- As stated in the above snap, the user is created named 'appuser'
+- If we don't mention any user in the docker file 'root' user will be considered and may be the appuser does not have permission to execute the application.
+
+Q: Docker host is running out of disk space. How do you clean up?
+
+	docker system df
+	docker system prune
+
+- Above, 'prune' command is used to clean up dangling images and df is to check the status.
+- Dangling images: Images that are no longer referenced by any tags or active containers. They are essentially orphaned image layers that remain on the system but are not actively in use or easily identifiable by a name and tag.
+- 
 
 
 
