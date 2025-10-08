@@ -376,8 +376,7 @@ Note: For the basic calculator app we don't require so heavy image
 * When we run a 'kubectl' command to create resources on the kubernetes cluster initially this request sent to API server.     
 * API server performs the authentication and authorization.
 * If the request is valid, it sends the request to the scheduler.
-* Then, scheduler decide on which node the pod has to be scheduled.
-* It takes pod affinity, node affinity, taints & tolerations everything into consideration and identifies right nodes for the pod.
+* Then, scheduler decide on which node the pod has to be scheduled. It takes pod affinity, node affinity, taints & tolerations everything into consideration and identifies right nodes for the pod.
 * Once the scheduler identifies right node for the pod, API server forward the request to the kubelet on that particular node.
 * Kubelet calls container runtime such as docker shim, CRI-o, or container D
 * Then, container runtime takes the responsibility to run the container in the pod.
