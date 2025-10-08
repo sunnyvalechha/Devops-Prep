@@ -367,7 +367,7 @@ Note: For the basic calculator app we don't require so heavy image
 - Explain kubernetes architecture and its key components?
 
 * Kubernetes architecture is broadly devided into 2 parts:
-  1. Control plane / Master component
+  1. Control plane / Master node
   2. Data plane / Worker nodes
 
 * Primary component of Control Plane - API server, ETCD, Scheduler, Controler Manager.
