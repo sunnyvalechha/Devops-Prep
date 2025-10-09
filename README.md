@@ -482,7 +482,63 @@ Q: What is Headless service in Kubernetes and when did you use it?
 - A headless service does not have a cluster IP assigned to it. Instead of providing a single virtual IP address for the service, a headless service creates a DNS record for each pod associated with the service. These DNS records can then be used to directly address each pod.
 - Here, a backend pod want to communicate with the database through service but it should not route the traffic to diffrent pod everytime.
 - 1 pod must associate with 1 DB.
-- So it will create a DNS A record name that will 
+- So it will create a DNS A record name that will
+
+		vi headless.yml
+
+		apiVersion: v1
+		kind: Service
+		metadata:
+		    name: my-db-headless-service
+		spec:
+		    clusterIP: None
+		    selector:
+		        app: mysql
+		    ports:
+		     - port: 3306
+		       targetPort: 3306
+
+		vi stateful.yml
+
+		apiVersion: apps/v1
+		kind: StatefulSet
+		metadata:
+		    name: mysql-statefulset
+		spec:
+		    serviceName: "my-db-headless-service"   # Ensure this matches the service name
+		    replicas: 3
+		    selector:
+		        matchLabels:
+		            app: mysql
+		    template:
+		      metadata:
+		        labels:
+		          app: mysql
+		      spec:
+		        containers:
+		         - name: mysql
+		           image: mysql:5.7
+		           env:
+		            - name: MYSQL_ROOT_PASSWORD
+		              value: "rootpassword"
+		           ports:
+		            - containerPort: 3306
+
+		kubectl apply -f stateful.yml
+		kubectl apply -f headless.yml
+		kubectl get all
+
+Notice: service/my-db-headless-service  ClusterIP is None and DNS name is "mysql-statefulset-0.my-db-headless-service.default.cluster.local"
+
+		kubectl run -it --rm --restart=Never --image=busybox dns-test -- nslookup mysql-statefulset-0.my-db-headless-service.default.svc.cluster.local
+
+		Server:         10.96.0.10
+		Address:        10.96.0.10:53
+		
+		Name:   mysql-statefulset-0.my-db-headless-service.default.svc.cluster.local
+		Address: 192.168.1.4
+
+		kubectl get all -o wide 	# notice the Ip of pod, it will be same
 
 <img width="881" height="458" alt="image" src="https://github.com/user-attachments/assets/8765def1-2cdc-4b1e-8be5-3429cff9e323" />
 
