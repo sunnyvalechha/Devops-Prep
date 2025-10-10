@@ -540,6 +540,10 @@ Notice: service/my-db-headless-service  ClusterIP is None and DNS name is "mysql
 
 		kubectl get all -o wide 	# notice the Ip of pod, it will be same
 
+		kubectl delete pod/mysql-statefulset-0		# Ip has changed, in new pod
+
+		kubectl run -it --rm --restart=Never --image=busybox dns-test -- nslookup mysql-statefulset-0.my-db-headless-service.default.svc.cluster.local		# dns has attached to new pod's IP 
+
 <img width="881" height="458" alt="image" src="https://github.com/user-attachments/assets/8765def1-2cdc-4b1e-8be5-3429cff9e323" />
 
 <img width="540" height="499" alt="image" src="https://github.com/user-attachments/assets/243ed528-ca9e-43fa-a273-92bf153e9d93" />
