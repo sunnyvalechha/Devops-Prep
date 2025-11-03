@@ -879,19 +879,27 @@ Q: ImagePullBackOff / ErrImagePull / Invalid Image Name Error?
 
 - Practical:-
 
-	kubectl create deployment nginx-deploy --image=nginx 
-	kubectl get pod -w
-	kubectl describe pod nginx-deploy..
+ kubectl create deployment nginx-deploy --image=nginx 
+ kubectl get pod -w
+ kubectl describe pod nginx-deploy
 
 * Till above everything was fine, we have make error as image does not exit
 
-	kubectl edit deployment nginx-deploy
+ kubectl edit deployment nginx-deploy
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/dc16f29b-2f71-4266-95d7-c15b24d33f26)
 
-	kubectl get pods -w 
+	kubectl get pods -w
+
+* First the status will turn from 'Running' to 'ErrImagePull'
+* Then it turn into 'ImagePullBackOff'
+* It also can show 'CrashLoopBackOff'
+* And it will run in a loop with all these errors.
 
 ![image](https://github.com/sunnyvalechha/Devops-inter-prep/assets/59471885/6f45b815-6a33-4507-a671-1c87be22b302)
+
+<img width="681" height="380" alt="image" src="https://github.com/user-attachments/assets/65462b51-2063-4635-9819-30b7ed10c8e0" />
+
 
 Q: Crash Loop Back Off error ?
 
