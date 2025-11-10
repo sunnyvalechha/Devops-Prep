@@ -1109,7 +1109,7 @@ Q: Secured sensitive information on Kubernetes cluster?
 ===========================================================================================
 # Jenkins & CICD Pipeline
 
-- What type of Jenkins file are you following & Which agent you are using in Jenkins file?
+- What type of Jenkins file are you following & Which agent are you using in the Jenkins file?
 * Declaritive jenkins files and Docker agent as it is light weight in nature also prevents lot of installations. 
 
 - What is difference between Continues Integration and Continues development?
