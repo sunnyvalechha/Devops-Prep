@@ -1120,11 +1120,25 @@ Q: 5 build targets that you use maven frequently?
 
 Q: Which artifact repository you use for build?
 
-- Artifact repository is used for downloading the third party packages in our organization.
-- In the current org we use Nexus as a artifact repository. 
+- Artifact repository is used for downloading the third party packages.
+- In the current org we use Nexus as a artifact repository.
+- Only supported version of a third party dependencies are placed in the artifact repository so that developers can use them.
+- Apart from that, everytime when we create builds we place those jar files or enterprise archive files onto the artifact repository.
 
+Q: How do you configure Artifactory for your application in Maven?
 
+- You need to follow 2 steps to configure Artifactory for your application:
+1. I will configure 'settings.xml' a default settings file in Maven. We can update this file for all our applications that we build through Maven.
+2. Within 'settings.xml' we can configure the location for our artifact tree.
+3. In our case we used self-hosted Nexus as we use Nexus as artifact repository manager and this Nexus is self-hosted in our on-premise infrastructure.
+4. We need to provide the location for the Nexus artifactory within the 'settings.xml' file.
 
+Q: Build pass locally but fails in CI. How to troubleshoot ?
+
+- First, ask interviewer that what is the build language? If it is Maven.
+- First step, I will go to the build log in jenkins build log and understand what exactly is the reason for the build. Suppose I got no proper reason for the failure then I will go to the next step.
+- 
+-  
 ==========================================
 CICD: Abhishek Veeramalla
 
