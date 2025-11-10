@@ -1109,6 +1109,52 @@ Q: Secured sensitive information on Kubernetes cluster?
 ===========================================================================================
 # Jenkins & CICD Pipeline
 
+==========================================
+CICD: Abhishek Veeramalla
+
+* Continues Integration - Integrate set of tools that we follow before delivering our application to the customer. 
+* Continues Delivery - We deploy our application on a specific platform for our customer.
+
+Some standard steps that every organization follow:
+
+1. Unit test the application - Selenium
+2. Static code analysis - 
+3. Code quality and Vulnerability testing - 
+4. Automation testing
+5. Reports - 
+6. Deployment - 
+
+Jenkins works as an orchestrator which will facilitate all tools like K8s, Docker to deploy the application.
+
+Application --> Git --> Jenkins --> 
+		Dev Env
+		Stage Env
+		Production Env
+		
+Implementation and Explanation:
+
+* We are using our source code repository (VCS)tool as github and our target platform is Kubernetes.
+* Also we are using our orchestrator (CICD tool) as Jenkins. 
+* Whenever we make a code commit it creates a commit in github repository and git webhook triggers the pipeline in the Jenkins.
+* So Jenkins start the continues integration part in multiple stages:
+1. First stage  - is check out the code.
+2. Second Stage - Perform build actions along with the unit test cases with MAVEN because our application code is Java based.
+3. Third Stage  - Code Scanning with Sonar Qube
+4. Image build  - We are builing a container image using docker as our target platform is Kubernetes.
+5. Image Scan   - Once the container is build, image scanning is necessary.
+6. Image Push   - Once we are sure that image is free from vulnerability, we push image to Image registry like Docker Hub or ECR.
+
+
+- Above is the continues integration and we write jenkins file (declarative approach) in Jenkins for each of the step for orchestration.
+
+* Now get the Image from Docker Hub to the Kubernetes platform as this Image has new changes of the application.
+* To do that some people use the same jenkins pipeline. Some people use another pipeline.
+* Update the Image url / path in the kubernetes manifest yaml.
+* Now, updated image again pushed to the github repository (another repository).
+* Now, with the help of ansible we push the new commit to the kubernetes platform. Advantage of ansible because we have 4 kubernetes cluster.
+
+
+==========================================
 - What type of Jenkins file are you following & Which agent are you using in the Jenkins file?
 * Declaritive jenkins files and Docker agent as it is light weight in nature also prevents lot of installations. 
 
