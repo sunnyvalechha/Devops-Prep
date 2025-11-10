@@ -1117,6 +1117,14 @@ Q: 5 build targets that you use maven frequently?
 - mvn package - package the '.jar' and '.war' file. It creates the targets 
 - mvn install - to place artifacts into local repositories so that I can use them later also push the artifacts to nexus repository.
 
+
+Q: Which artifact repository you use for build?
+
+- Artifact repository is used for downloading the third party packages in our organization.
+- In the current org we use Nexus as a artifact repository. 
+
+
+
 ==========================================
 CICD: Abhishek Veeramalla
 
