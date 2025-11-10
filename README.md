@@ -1109,6 +1109,14 @@ Q: Secured sensitive information on Kubernetes cluster?
 ===========================================================================================
 # Jenkins & CICD Pipeline
 
+Q: 5 build targets that you use maven frequently?
+
+- mvn clean - this is used to clean the previous build in the /target directory, before running any a new build it is important to clear the target directory.
+- mvn compile - 'src/main/java' source file compiled folder.
+- mvn test - to run unit test cases in source file folder'src/test/java'.
+- mvn package - package the '.jar' and '.war' file. It creates the targets 
+- mvn install - to place artifacts into local repositories so that I can use them later also push the artifacts to nexus repository.
+
 ==========================================
 CICD: Abhishek Veeramalla
 
@@ -1152,8 +1160,6 @@ Implementation and Explanation:
 * Update the Image url / path in the kubernetes manifest yaml.
 * Now, updated image again pushed to the github repository (another repository).
 * Now, with the help of ansible we push the new commit to the kubernetes platform. Advantage of ansible because we have 4 kubernetes cluster.
-
-
 ==========================================
 - What type of Jenkins file are you following & Which agent are you using in the Jenkins file?
 * Declaritive jenkins files and Docker agent as it is light weight in nature also prevents lot of installations. 
