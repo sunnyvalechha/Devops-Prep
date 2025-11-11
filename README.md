@@ -1183,12 +1183,14 @@ Implementation and Explanation:
 * Now, updated image again pushed to the github repository (another repository).
 * Now, with the help of ansible we push the new commit to the kubernetes platform. Advantage of ansible because we have 4 kubernetes cluster.
 ==========================================
-- What type of Jenkins file are you following & Which agent are you using in the Jenkins file?
-* Declaritive jenkins files and Docker agent as it is light weight in nature also prevents lot of installations. 
 
-- What is difference between Continues Integration and Continues development?
+Q: What type of Jenkins file are you following & Which agent are you using in the Jenkins file?
 
-- What is Jenkins declaritive pipeline?
+- Declaritive jenkins files and Docker agent as it is light weight in nature also prevents lot of installations. 
+
+Q: What is difference between Continues Integration and Continues development?
+
+Q: What is Jenkins declaritive pipeline?
 
 - What are stages and flow of Jenkins CICD pipeline?
 * Dev
