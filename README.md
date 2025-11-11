@@ -6,7 +6,8 @@
 * Another major part of my work involves writing Terraform code to provision infrastructure, including Kubernetes clusters. As the application was in its initial stages, there were frequent infrastructure provisioning requests, and most of those tasks were assigned to me. I also created Terraform modules for reusability and stored them in a centralized repository.
 * Our deployments are primarily on AWS, so I work extensively with various AWS services, focusing also on the observability aspect to ensure system reliability and performance.
 * Additionally, I’ve worked on automating manual tasks using Ansible, which helped streamline operations and reduce repetitive work.
-* Throughout the sprint, I actively participate in planning and review meetings with the manager and the team. Toward the end of the day, I update Jira with my progress so that teammates and management can track the status of ongoing work as our leadership places strong emphasis on clear documentation and visibility.
+* Throughout the sprint, I actively participate in planning and review meetings with the manager and the team.
+* Toward the end of the day, I update Jira with my progress so that teammates and management can track the status of ongoing work for clear documentation and visibility.
 
 
 # Terraform
