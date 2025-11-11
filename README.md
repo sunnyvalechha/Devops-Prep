@@ -1,3 +1,16 @@
+# Day-2-Day Tasks
+
+* As part of my day-2-day work I start with daily standup as we follow agile methodology, where I update what work I've done and if I block I will explain the reason the thing I've tried in my trobleshooting and looking for help on xyz thing.
+* Once the daily standup is done I will head to Jira and see what are the tasks assisgned to me and I will look for high priority tasks.
+* So, I was part of the Avaya's Csp project where I work on the CI/CD pipelines using Jenkins as we have multiple repositories in the project for multiple microservices and I am one of the key member to build and maintain cicd pipelines.
+* Apart from that my major activities includes writing terraform codes to provision infrastructure to deploy kubernetes cluster, as the application was in its initial phase lots of requests comes to provision the infrastructure so all the ticktes are assigned to me.
+* I also create terraform modules to re-use the code and put it into the centralized location.
+* Apart from that all our application are deployed to Aws which is our primary cloud platform so I work on various Aws services and also on the observability part.
+* I also worked majorily on the tasks to automate maunaul tasks with the help of ansible. 
+* Meanwhile we have a meetings with the Manager for the sprint planning, I actively participate in them.
+* Towards the end of the day, I try to update the Jira trackers as my collegues might got reference from them. Especially our management are very focused on Jira so I try to update everything I done.
+
+
 # Terraform
 
 Q: Difference between for_each and for_in in Terraform?
