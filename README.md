@@ -1,14 +1,12 @@
 # Day-2-Day Tasks
 
-* As part of my day-2-day work I start with daily standup as we follow agile methodology, where I update what work I've done and if I block I will explain the reason the thing I've tried in my trobleshooting and looking for help on xyz thing.
-* Once the daily standup is done I will head to Jira and see what are the tasks assisgned to me and I will look for high priority tasks.
-* So, I was part of the Avaya's Csp project where I work on the CI/CD pipelines using Jenkins as we have multiple repositories in the project for multiple microservices and I am one of the key member to build and maintain cicd pipelines.
-* Apart from that my major activities includes writing terraform codes to provision infrastructure to deploy kubernetes cluster, as the application was in its initial phase lots of requests comes to provision the infrastructure so all the ticktes are assigned to me.
-* I also create terraform modules to re-use the code and put it into the centralized location.
-* Apart from that all our application are deployed to Aws which is our primary cloud platform so I work on various Aws services and also on the observability part.
-* I also worked majorily on the tasks to automate maunaul tasks with the help of ansible. 
-* Meanwhile we have a meetings with the Manager for the sprint planning, I actively participate in them.
-* Towards the end of the day, I try to update the Jira trackers as my collegues might got reference from them. Especially our management are very focused on Jira so I try to update everything I done.
+* As part of my day-to-day work, I start with the daily stand-up meeting since we follow the Agile methodology. In the stand-up, I share my progress, mention any blockers I’m facing, explain the troubleshooting steps I’ve already tried, and seek help when needed.
+* After the stand-up, I review my assigned tasks in Jira, prioritize them based on urgency, and plan my day accordingly.
+* I was part of Avaya’s Meeting Server project, where I primarily worked on CI/CD pipeline development and maintenance using Jenkins. Since the project had multiple microservices spread across different repositories, I was one of the key members responsible for designing and maintaining the CI/CD pipelines to ensure smooth and consistent deployments.
+* Another major part of my work involves writing Terraform code to provision infrastructure, including Kubernetes clusters. As the application was in its initial stages, there were frequent infrastructure provisioning requests, and most of those tasks were assigned to me. I also created Terraform modules for reusability and stored them in a centralized repository.
+* Our deployments are primarily on AWS, so I work extensively with various AWS services, focusing also on the observability aspect to ensure system reliability and performance.
+* Additionally, I’ve worked on automating manual tasks using Ansible, which helped streamline operations and reduce repetitive work.
+* Throughout the sprint, I actively participate in planning and review meetings with the manager and the team. Toward the end of the day, I update Jira with my progress so that teammates and management can track the status of ongoing work as our leadership places strong emphasis on clear documentation and visibility.
 
 
 # Terraform
