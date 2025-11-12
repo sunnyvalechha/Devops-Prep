@@ -1,13 +1,17 @@
 # Day-2-Day Tasks
 
-* As part of my day-to-day work, I start with the daily stand-up meeting since we follow the Agile methodology. In the stand-up, I share my progress, mention any blockers I’m facing, explain the troubleshooting steps I’ve already tried, and seek help when needed.
+* As part of my day-to-day work, I start my day with the daily stand-up meeting since we follow the Agile methodology. In the stand-up, I share my progress on the tasks, mention any blockers I’m facing, explain the troubleshooting steps I’ve performed, and seek help when needed.
 * After the stand-up, I review my assigned tasks in Jira, prioritize them based on urgency, and plan my day accordingly.
-* I was part of Avaya’s Meeting Server project, where I primarily worked on CI/CD pipeline development and maintenance using Jenkins. Since the project had multiple microservices spread across different repositories, I was one of the key members responsible for designing and maintaining the CI/CD pipelines to ensure smooth and consistent deployments.
+* I was part of Avaya’s Meeting Server project, where I primarily worked on CI/CD pipeline development and maintenance using Jenkins.
 * Another major part of my work involves writing Terraform code to provision infrastructure, including Kubernetes clusters. As the application was in its initial stages, there were frequent infrastructure provisioning requests, and most of those tasks were assigned to me. I also created Terraform modules for reusability and stored them in a centralized repository.
 * Our deployments are primarily on AWS, so I work extensively with various AWS services, focusing also on the observability aspect to ensure system reliability and performance.
 * Additionally, I’ve worked on automating manual tasks using Ansible, which helped streamline operations and reduce repetitive work.
 * Throughout the sprint, I actively participate in planning and review meetings with the manager and the team.
 * Toward the end of the day, I update Jira with my progress so that teammates and management can track the status of ongoing work for clear documentation and visibility.
+
+# About yourself
+
+* 
 
 
 # Terraform
